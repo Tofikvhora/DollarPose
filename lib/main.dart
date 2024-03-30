@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RoutesOfApp.genRoutes,
-          title: 'Name Of App',
+          title: 'Dollar Pos',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
                 seedColor: const Color(0xff90330E),

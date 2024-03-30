@@ -1,4 +1,5 @@
 import 'package:dollarpos/utils/StringNavigation.dart';
+import 'package:dollarpos/view/EmpolyPage.dart';
 import 'package:dollarpos/view/MoneyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,8 +40,14 @@ class ManuPage extends HookWidget {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Image.asset(
+                            'asset/Icons/Logo.png',
+                            width: 60.w,
+                            height: 60.h,
+                            fit: BoxFit.fitWidth,
+                          ),
                           IconButton(
                               onPressed: () {
                                 _key.currentState!.closeDrawer();
@@ -52,12 +59,7 @@ class ManuPage extends HookWidget {
                               )),
                         ],
                       ),
-                      Image.asset(
-                        'asset/Icons/Logo.png',
-                        width: 80.w,
-                        height: 80.h,
-                        fit: BoxFit.fitWidth,
-                      ),
+
                     ],
                   )),
               ListTile(
@@ -95,7 +97,7 @@ class ManuPage extends HookWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  EmployPage.route.pushOnThis(context);
                 },
               ),
               ListTile(
