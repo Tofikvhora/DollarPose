@@ -1,5 +1,6 @@
 import 'package:dollarpos/utils/StringNavigation.dart';
 import 'package:dollarpos/view/EmpolyPage.dart';
+import 'package:dollarpos/view/ItemPage.dart';
 import 'package:dollarpos/view/MoneyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,7 +60,6 @@ class ManuPage extends HookWidget {
                               )),
                         ],
                       ),
-
                     ],
                   )),
               ListTile(
@@ -116,7 +116,7 @@ class ManuPage extends HookWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  ItemPage.route.pushOnThis(context);
                 },
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:dollarpos/view/EmpolyPage.dart';
+import 'package:dollarpos/view/ItemPage.dart';
 import 'package:dollarpos/view/LoginPage.dart';
 import 'package:dollarpos/view/ManuPage.dart';
 import 'package:dollarpos/view/MoneyPage.dart';
@@ -15,6 +16,8 @@ class RoutesOfApp {
         return MaterialPageRoute(builder: (_) => const MoneyPage());
       case EmployPage.route:
         return MaterialPageRoute(builder: (_) => const EmployPage());
+      case ItemPage.route:
+        return MaterialPageRoute(builder: (_) => ItemPage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

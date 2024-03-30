@@ -9,6 +9,7 @@ class MoneyPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLotto = useState(true);
     final isSwap = useState(true);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -169,7 +170,7 @@ class MoneyPage extends HookWidget {
           // main content
           SafeArea(
             child: Padding(
-              padding:  EdgeInsets.symmetric(vertical: 3.h),
+              padding: EdgeInsets.symmetric(vertical: 3.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -181,8 +182,8 @@ class MoneyPage extends HookWidget {
                               margin: EdgeInsets.symmetric(
                                   horizontal: 1.w, vertical: 1.h),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               width: width * 0.41,
                               height: height * 0.78,
                               child: Column(
@@ -235,9 +236,12 @@ class MoneyPage extends HookWidget {
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(5),
-                                                      borderSide: const BorderSide(
-                                                          color: Colors.black)),
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .black)),
                                               errorBorder: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
@@ -269,9 +273,12 @@ class MoneyPage extends HookWidget {
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(5),
-                                                      borderSide: const BorderSide(
-                                                          color: Colors.black)),
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .black)),
                                               errorBorder: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
@@ -298,8 +305,8 @@ class MoneyPage extends HookWidget {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         headingRowColor:
-                                            const MaterialStatePropertyAll<Color>(
-                                                Colors.black),
+                                            const MaterialStatePropertyAll<
+                                                Color>(Colors.black),
                                         columns: const [
                                           DataColumn(
                                             label: Text('UPC'),
@@ -344,6 +351,7 @@ class MoneyPage extends HookWidget {
                                       InkWell(
                                         onTap: () {
                                           // TODO:  add Some logic
+                                          isLotto.value = true;
                                         },
                                         child: Container(
                                           alignment: Alignment.center,
@@ -352,9 +360,11 @@ class MoneyPage extends HookWidget {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary),
+                                              color: isLotto.value == true
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary
+                                                  : Colors.black38),
                                           child: Text(
                                             'Lotto',
                                             style: TextStyle(
@@ -367,17 +377,22 @@ class MoneyPage extends HookWidget {
                                       InkWell(
                                         onTap: () {
                                           // TODO:  add Some logic
+                                          isLotto.value = false;
                                         },
                                         child: Container(
-                                          margin:
-                                              EdgeInsets.symmetric(horizontal: 3.w),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 3.w),
                                           alignment: Alignment.center,
                                           width: width * 0.1,
                                           height: height * 0.065,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: Colors.black38),
+                                              color: isLotto.value == false
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary
+                                                  : Colors.black38),
                                           child: Text(
                                             'Department',
                                             style: TextStyle(
@@ -401,125 +416,175 @@ class MoneyPage extends HookWidget {
                                             SizedBox(
                                               width: width * 0.4,
                                               height: height * 0.502,
-                                              child: GridView.builder(
-                                                scrollDirection: Axis.vertical,
-                                                shrinkWrap: true,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 5.w, vertical: 9.h),
-                                                itemCount: 6,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 2),
-                                                itemBuilder: (context, index) {
-                                                  return Container(
-                                                    margin: EdgeInsets.symmetric(
-                                                        horizontal: 1.w,
-                                                        vertical: 3.h),
-                                                    width: width * 0.2,
-                                                    height: height * 0.03,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
-                                                        color: Colors.white),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment.center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'asset/Icons/cash-machine.png',
-                                                          width: 25.w,
-                                                          height: 80.h,
-                                                          fit: BoxFit.fitWidth,
-                                                        ),
-                                                        Text(
-                                                          "NonTax",
-                                                          style: TextStyle(
-                                                              fontSize: 6.sp,
-                                                              color: Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight.bold),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              ),
+                                              child: isLotto.value == true
+                                                  ? GridView.builder(
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      shrinkWrap: true,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 5.w,
+                                                              vertical: 9.h),
+                                                      itemCount: 6,
+                                                      gridDelegate:
+                                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                                              crossAxisCount:
+                                                                  2),
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return Container(
+                                                          margin: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      1.w,
+                                                                  vertical:
+                                                                      3.h),
+                                                          width: width * 0.2,
+                                                          height: height * 0.03,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              color:
+                                                                  Colors.white),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceAround,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Image.asset(
+                                                                'asset/Icons/cash-machine.png',
+                                                                width: 25.w,
+                                                                height: 80.h,
+                                                                fit: BoxFit
+                                                                    .fitWidth,
+                                                              ),
+                                                              Text(
+                                                                "NonTax",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        6.sp,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    )
+                                                  : Container(),
                                             ),
                                             Container(
                                               width: 1.w,
                                               height: height * 0.54,
-                                              margin: EdgeInsets.symmetric(horizontal: 5.w),
-                                              color: Colors.black.withOpacity(0.3),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 5.w),
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
                                             ),
                                             Column(
-                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
                                               children: [
                                                 SizedBox(
                                                   width: 50.w,
                                                   height: 345.h,
-                                                  child:
-                                                   Column(
+                                                  child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.spaceBetween,
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       const Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: [
                                                           RichTextReuse(
-                                                            title: 'SubTotal         ',
-                                                            amount: '      \$ 0.00',
+                                                            title:
+                                                                'SubTotal         ',
+                                                            amount:
+                                                                '      \$ 0.00',
                                                           ),
                                                           RichTextReuse(
-                                                            title: 'Discount         ',
-                                                            amount: '      \$ 0.00',
+                                                            title:
+                                                                'Discount         ',
+                                                            amount:
+                                                                '      \$ 0.00',
                                                           ),
                                                           RichTextReuse(
-                                                            title: 'Tax                  ',
-                                                            amount: '      \$ 0.00',
+                                                            title:
+                                                                'Tax                  ',
+                                                            amount:
+                                                                '      \$ 0.00',
                                                           ),
                                                           RichTextReuse(
-                                                            title: 'SurChange      ',
-                                                            amount: '     \$ 0.00',
+                                                            title:
+                                                                'SurChange      ',
+                                                            amount:
+                                                                '     \$ 0.00',
                                                           ),
                                                         ],
                                                       ),
-                                                      Divider(color: Colors.black12,height: 2.h,thickness: 1.w,),
+                                                      Divider(
+                                                        color: Colors.black12,
+                                                        height: 2.h,
+                                                        thickness: 1.w,
+                                                      ),
                                                       Padding(
-                                                        padding: EdgeInsets.symmetric(
-                                                            horizontal: 3.w),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    3.w),
                                                         child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
                                                           children: [
                                                             Text(
                                                               '0',
                                                               style: TextStyle(
-                                                                  fontSize: 9.sp,
-                                                                  color: Theme.of(context)
+                                                                  fontSize:
+                                                                      9.sp,
+                                                                  color: Theme.of(
+                                                                          context)
                                                                       .colorScheme
                                                                       .onSecondary,
                                                                   fontWeight:
-                                                                      FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                             Text(
                                                               'Items',
                                                               style: TextStyle(
-                                                                  fontSize: 6.sp,
-                                                                  color: Colors.black,
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
-                                                                      FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             )
                                                           ],
                                                         ),
                                                       ),
-                                                      Divider(color: Colors.black12,height: 2.h,thickness: 1.w,),
+                                                      Divider(
+                                                        color: Colors.black12,
+                                                        height: 2.h,
+                                                        thickness: 1.w,
+                                                      ),
                                                       Container(
-                                                        alignment: Alignment.center,
+                                                        alignment:
+                                                            Alignment.center,
                                                         width: width * 0.16,
                                                         height: height * 0.17,
                                                         // color: Theme.of(context)
@@ -527,40 +592,49 @@ class MoneyPage extends HookWidget {
                                                         //     .onSecondary,
                                                         child: Column(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment.spaceEvenly,
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             Text(
                                                               'Change Due',
                                                               style: TextStyle(
-                                                                  fontSize: 6.sp,
-                                                                  color: Colors.black,
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                             Text(
                                                               '\$0.00',
                                                               style: TextStyle(
-                                                                  fontSize: 7.sp,
-                                                                  color: Theme.of(context)
+                                                                  fontSize:
+                                                                      7.sp,
+                                                                  color: Theme.of(
+                                                                          context)
                                                                       .colorScheme
                                                                       .onSecondary,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                             Text(
                                                               'Check out',
                                                               style: TextStyle(
-                                                                  fontSize: 6.sp,
-                                                                  color: Colors.black,
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                           ],
                                                         ),
                                                       )
                                                     ],
                                                   ),
-
                                                 ),
                                               ],
                                             )
@@ -568,7 +642,7 @@ class MoneyPage extends HookWidget {
                                         ),
                                         SizedBox(height: 10.h),
                                         Divider(
-                                          height:1,
+                                          height: 1,
                                           color: Colors.black12,
                                           thickness: 1.w,
                                         ),
@@ -577,87 +651,158 @@ class MoneyPage extends HookWidget {
                                           children: [
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 3.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 3.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10),
-                                                color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                'Card',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('Card',style: TextStyle(fontSize: 7.sp
-                                              ,color:Colors.black,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$ 5',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$ 5',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$ 10',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$ 10',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10),
-                                                color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$ 20',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$ 20',style: TextStyle(fontSize: 7.sp
-                                              ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10),
-                                                color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$50',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$50',style: TextStyle(fontSize: 7.sp
-                                              ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10),
-                                                color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$100',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$100',style: TextStyle(fontSize: 7.sp
-                                              ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 34.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10),
-                                                color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                'Exact AMT',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('Exact AMT',textAlign: TextAlign.center,style: TextStyle(fontSize: 7.sp
-                                              ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                           ],
                                         )
@@ -690,7 +835,7 @@ class MoneyPage extends HookWidget {
                                           height: height * 0.065,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(10),
+                                                  BorderRadius.circular(10),
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .onSecondary),
@@ -708,14 +853,14 @@ class MoneyPage extends HookWidget {
                                           // TODO:  add Some logic
                                         },
                                         child: Container(
-                                          margin:
-                                          EdgeInsets.symmetric(horizontal: 3.w),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 3.w),
                                           alignment: Alignment.center,
                                           width: width * 0.1,
                                           height: height * 0.065,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(10),
+                                                  BorderRadius.circular(10),
                                               color: Colors.black38),
                                           child: Text(
                                             'Department',
@@ -744,29 +889,32 @@ class MoneyPage extends HookWidget {
                                                 scrollDirection: Axis.vertical,
                                                 shrinkWrap: true,
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 5.w, vertical: 9.h),
+                                                    horizontal: 5.w,
+                                                    vertical: 9.h),
                                                 itemCount: 6,
                                                 gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 4),
+                                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 4),
                                                 itemBuilder: (context, index) {
                                                   return Container(
-                                                    margin: EdgeInsets.symmetric(
-                                                        horizontal: 1.w,
-                                                        vertical: 3.h),
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 1.w,
+                                                            vertical: 3.h),
                                                     width: width * 0.2,
                                                     height: height * 0.09,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                            BorderRadius
+                                                                .circular(10),
                                                         color: Colors.white),
                                                     child: Column(
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                          CrossAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Image.asset(
                                                           'asset/Icons/cash-machine.png',
@@ -778,9 +926,11 @@ class MoneyPage extends HookWidget {
                                                           "NonTax",
                                                           style: TextStyle(
                                                               fontSize: 5.sp,
-                                                              color: Colors.black,
+                                                              color:
+                                                                  Colors.black,
                                                               fontWeight:
-                                                              FontWeight.bold),
+                                                                  FontWeight
+                                                                      .bold),
                                                         )
                                                       ],
                                                     ),
@@ -791,74 +941,107 @@ class MoneyPage extends HookWidget {
                                             Container(
                                               width: 1.w,
                                               height: height * 0.54,
-                                              margin: EdgeInsets.symmetric(horizontal: 5.w),
-                                              color: Colors.black.withOpacity(0.3),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 5.w),
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
                                             ),
                                             Column(
-                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
                                               children: [
                                                 SizedBox(
                                                   width: 50.w,
                                                   height: 345.h,
-                                                  child:
-                                                  Column(
+                                                  child: Column(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       const Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: [
                                                           RichTextReuse(
-                                                            title: 'SubTotal         ',
-                                                            amount: '      \$ 0.00',
+                                                            title:
+                                                                'SubTotal         ',
+                                                            amount:
+                                                                '      \$ 0.00',
                                                           ),
                                                           RichTextReuse(
-                                                            title: 'Discount         ',
-                                                            amount: '      \$ 0.00',
+                                                            title:
+                                                                'Discount         ',
+                                                            amount:
+                                                                '      \$ 0.00',
                                                           ),
                                                           RichTextReuse(
-                                                            title: 'Tax                  ',
-                                                            amount: '      \$ 0.00',
+                                                            title:
+                                                                'Tax                  ',
+                                                            amount:
+                                                                '      \$ 0.00',
                                                           ),
                                                           RichTextReuse(
-                                                            title: 'SurChange      ',
-                                                            amount: '     \$ 0.00',
+                                                            title:
+                                                                'SurChange      ',
+                                                            amount:
+                                                                '     \$ 0.00',
                                                           ),
                                                         ],
                                                       ),
-                                                      Divider(color: Colors.black12,height: 2.h,thickness: 1.w,),
+                                                      Divider(
+                                                        color: Colors.black12,
+                                                        height: 2.h,
+                                                        thickness: 1.w,
+                                                      ),
                                                       Padding(
-                                                        padding: EdgeInsets.symmetric(
-                                                            horizontal: 3.w),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    3.w),
                                                         child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
                                                           children: [
                                                             Text(
                                                               '0',
                                                               style: TextStyle(
-                                                                  fontSize: 9.sp,
-                                                                  color: Theme.of(context)
+                                                                  fontSize:
+                                                                      9.sp,
+                                                                  color: Theme.of(
+                                                                          context)
                                                                       .colorScheme
                                                                       .onSecondary,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                             Text(
                                                               'Items',
                                                               style: TextStyle(
-                                                                  fontSize: 6.sp,
-                                                                  color: Colors.black,
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             )
                                                           ],
                                                         ),
                                                       ),
-                                                      Divider(color: Colors.black12,height: 2.h,thickness: 1.w,),
+                                                      Divider(
+                                                        color: Colors.black12,
+                                                        height: 2.h,
+                                                        thickness: 1.w,
+                                                      ),
                                                       Container(
-                                                        alignment: Alignment.center,
+                                                        alignment:
+                                                            Alignment.center,
                                                         width: width * 0.16,
                                                         height: height * 0.17,
                                                         // color: Theme.of(context)
@@ -866,40 +1049,49 @@ class MoneyPage extends HookWidget {
                                                         //     .onSecondary,
                                                         child: Column(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment.spaceEvenly,
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             Text(
                                                               'Change Due',
                                                               style: TextStyle(
-                                                                  fontSize: 6.sp,
-                                                                  color: Colors.black,
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                             Text(
                                                               '\$0.00',
                                                               style: TextStyle(
-                                                                  fontSize: 7.sp,
-                                                                  color: Theme.of(context)
+                                                                  fontSize:
+                                                                      7.sp,
+                                                                  color: Theme.of(
+                                                                          context)
                                                                       .colorScheme
                                                                       .onSecondary,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                             Text(
                                                               'Check out',
                                                               style: TextStyle(
-                                                                  fontSize: 6.sp,
-                                                                  color: Colors.black,
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
-                                                                  FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                           ],
                                                         ),
                                                       )
                                                     ],
                                                   ),
-
                                                 ),
                                               ],
                                             )
@@ -907,7 +1099,7 @@ class MoneyPage extends HookWidget {
                                         ),
                                         SizedBox(height: 10.h),
                                         Divider(
-                                          height:1,
+                                          height: 1,
                                           color: Colors.black12,
                                           thickness: 1.w,
                                         ),
@@ -916,87 +1108,158 @@ class MoneyPage extends HookWidget {
                                           children: [
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 3.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 3.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                'Card',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('Card',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.black,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$ 5',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$ 5',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$ 10',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$ 10',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$ 20',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$ 20',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$50',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$50',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 25.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                '\$100',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('\$100',style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 1.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
                                               width: 34.w,
                                               height: 80.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color:Theme.of(context).colorScheme.onSecondary
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                'Exact AMT',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              child: Text('Exact AMT',textAlign: TextAlign.center,style: TextStyle(fontSize: 7.sp
-                                                  ,color:Colors.white,fontWeight: FontWeight.bold),),
                                             ),
                                           ],
                                         )
@@ -1020,7 +1283,7 @@ class MoneyPage extends HookWidget {
                                     padding: EdgeInsets.only(top: 12.h),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         // first icons
                                         Container(
@@ -1030,7 +1293,7 @@ class MoneyPage extends HookWidget {
                                                   .colorScheme
                                                   .onSecondary,
                                               borderRadius:
-                                              BorderRadius.circular(5)),
+                                                  BorderRadius.circular(5)),
                                           height: 38.h,
                                           alignment: Alignment.center,
                                           child: const Icon(
@@ -1045,7 +1308,7 @@ class MoneyPage extends HookWidget {
                                           height: 40.h,
                                           child: TextField(
                                             textAlignVertical:
-                                            TextAlignVertical.center,
+                                                TextAlignVertical.center,
                                             decoration: InputDecoration(
                                               hintText: 'UPC',
                                               hintStyle: TextStyle(
@@ -1053,23 +1316,26 @@ class MoneyPage extends HookWidget {
                                                   color: Colors.black),
                                               enabledBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
                                               focusedBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
                                               focusedErrorBorder:
-                                              OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .black)),
                                               errorBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
                                             ),
@@ -1087,23 +1353,26 @@ class MoneyPage extends HookWidget {
                                                   color: Colors.black),
                                               enabledBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
                                               focusedBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
                                               focusedErrorBorder:
-                                              OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .black)),
                                               errorBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
                                             ),
@@ -1125,10 +1394,10 @@ class MoneyPage extends HookWidget {
                                             fontWeight: FontWeight.bold),
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(10)),
+                                                BorderRadius.circular(10)),
                                         headingRowColor:
-                                        const MaterialStatePropertyAll<Color>(
-                                            Colors.black),
+                                            const MaterialStatePropertyAll<
+                                                Color>(Colors.black),
                                         columns: const [
                                           DataColumn(
                                             label: Text('UPC'),
@@ -1170,7 +1439,7 @@ class MoneyPage extends HookWidget {
             ),
           ),
           Container(
-            color:Colors.black12.withOpacity(0.2),
+            color: Colors.black12.withOpacity(0.2),
             width: width,
             height: height * 0.1,
             child: Row(
@@ -1187,7 +1456,7 @@ class MoneyPage extends HookWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-               // home icons 
+                // home icons
                 SizedBox(
                   width: width * 0.3,
                   child: Row(
@@ -1197,44 +1466,35 @@ class MoneyPage extends HookWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          InkWell(
+                            splashColor: Colors.black12,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                child: Image.asset(
+                                  'asset/MoneyPageIcons/house.png',
+                                  width: 13.w,
+                                  height: 50.h,
+                                  fit: BoxFit.fitWidth,
+                                )),
+                          ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 1.w),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.home,
-                                  size: 12.w,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary,
-                                )),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 1.w),
-                            alignment: Alignment.center,
-                            width: 12.w,
-                            height: 40.h,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSecondary),
-                            child: IconButton(
-                                alignment: Alignment.center,
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.person,
-                                  size: 8.w,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.shuffle,
-                                size: 12.w,
-                                color:
-                                Theme.of(context).colorScheme.onSecondary,
+                              padding: EdgeInsets.symmetric(horizontal: 3.w),
+                              child: Image.asset(
+                                'asset/MoneyPageIcons/profile.png',
+                                width: 14.w,
+                                height: 50.h,
+                                fit: BoxFit.fitWidth,
+                              )),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 3.w),
+                              child: Image.asset(
+                                'asset/MoneyPageIcons/suffle.png',
+                                width: 13.w,
+                                height: 50.h,
+                                fit: BoxFit.fitWidth,
                               )),
                         ],
                       ),
@@ -1266,7 +1526,7 @@ class MoneyPage extends HookWidget {
                             style: TextStyle(
                                 fontSize: 5.sp,
                                 color:
-                                Theme.of(context).colorScheme.onSecondary,
+                                    Theme.of(context).colorScheme.onSecondary,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
@@ -1274,7 +1534,7 @@ class MoneyPage extends HookWidget {
                             style: TextStyle(
                                 fontSize: 5.sp,
                                 color:
-                                Theme.of(context).colorScheme.onSecondary,
+                                    Theme.of(context).colorScheme.onSecondary,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -1282,41 +1542,49 @@ class MoneyPage extends HookWidget {
                     ),
 
                     //icons
-                    IconButton(
-                        onPressed: () {
-                          isSwap.value = !isSwap.value;
-                        },
-                        icon: Icon(
-                          IconlyBold.filter,
-                          size: 12.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          IconlyBold.category,
-                          size: 12.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                    InkWell(
+                      splashColor: Colors.black26,
+                      onTap: () {
+                        isSwap.value = !isSwap.value;
+                      },
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 3.w),
+                          child: Image.asset(
+                            'asset/MoneyPageIcons/switch.png',
+                            width: 13.w,
+                            height: 50.h,
+                            fit: BoxFit.fitWidth,
+                          )),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Image.asset(
+                          'asset/MoneyPageIcons/menu.png',
+                          width: 13.w,
+                          height: 50.h,
+                          fit: BoxFit.fitWidth,
                         )),
 
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          IconlyBold.lock,
-                          size: 12.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Image.asset(
+                          'asset/MoneyPageIcons/lock.png',
+                          width: 13.w,
+                          height: 50.h,
+                          fit: BoxFit.fitWidth,
                         )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.support_agent,
-                          size: 12.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Image.asset(
+                          'asset/MoneyPageIcons/customer-service.png',
+                          width: 13.w,
+                          height: 50.h,
+                          fit: BoxFit.fitWidth,
                         )),
                   ],
                 ),
+
                 /// second row of all icons and support
-                
               ],
             ),
           ),
@@ -1338,7 +1606,13 @@ class MoneyPage extends HookWidget {
                           size: 12.w,
                           color: Colors.white,
                         )),
-                    Text('Last\nprint',style: TextStyle(fontSize:5.sp,color:Colors.white,fontWeight: FontWeight.bold),)
+                    Text(
+                      'Last\nprint',
+                      style: TextStyle(
+                          fontSize: 5.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
                 Row(
@@ -1351,18 +1625,51 @@ class MoneyPage extends HookWidget {
                           size: 12.w,
                           color: Colors.white,
                         )),
-                    Text('Reprint',style: TextStyle(fontSize:5.sp,color:Colors.white,fontWeight: FontWeight.bold),)
+                    Text(
+                      'Reprint',
+                      style: TextStyle(
+                          fontSize: 5.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
-               const IconsButtonsBottom(icons: Icons.access_time_outlined,name: 'abc',),
-                const IconsButtonsBottom(icons: Icons.discount,name: 'Discount',),
-                const IconsButtonsBottom(icons: Icons.security,name: 'Check',),
-                const IconsButtonsBottom(icons: Icons.store,name: 'Store',),
-                const IconsButtonsBottom(icons: Icons.newspaper,name: 'Info',),
-                const IconsButtonsBottom(icons: Icons.pause_circle_filled,name: 'Stop',),
-                const IconsButtonsBottom(icons: Icons.skip_next_rounded,name: 'next',),
-                const IconsButtonsBottom(icons: Icons.price_change,name: 'Chg-AMT',),
-                IconButton(onPressed: (){},icon:Icon(Icons.exit_to_app_outlined,size:12.w,color:Colors.white))
+                const IconsButtonsBottom(
+                  icons: Icons.access_time_outlined,
+                  name: 'abc',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.discount,
+                  name: 'Discount',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.security,
+                  name: 'Check',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.store,
+                  name: 'Store',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.newspaper,
+                  name: 'Info',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.pause_circle_filled,
+                  name: 'Stop',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.skip_next_rounded,
+                  name: 'next',
+                ),
+                const IconsButtonsBottom(
+                  icons: Icons.price_change,
+                  name: 'Chg-AMT',
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.exit_to_app_outlined,
+                        size: 12.w, color: Colors.white))
               ],
             ),
           )
@@ -1372,23 +1679,28 @@ class MoneyPage extends HookWidget {
   }
 }
 
-
 class IconsButtonsBottom extends StatelessWidget {
   final IconData icons;
   final String name;
-  const IconsButtonsBottom({super.key,required this.icons,required this.name});
+  const IconsButtonsBottom(
+      {super.key, required this.icons, required this.name});
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       children: [
-        IconButton(onPressed: (){},icon: Icon(icons,size: 14.sp,color:Colors.white)),
-        Text(name,style: TextStyle(fontSize:5.sp,color:Colors.white,fontWeight: FontWeight.bold),)
+        IconButton(
+            onPressed: () {},
+            icon: Icon(icons, size: 14.sp, color: Colors.white)),
+        Text(
+          name,
+          style: TextStyle(
+              fontSize: 5.sp, color: Colors.white, fontWeight: FontWeight.bold),
+        )
       ],
     );
   }
 }
-
 
 class RichTextReuse extends StatelessWidget {
   final String title;

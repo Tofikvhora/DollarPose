@@ -24,12 +24,11 @@ flutter:
   uses-material-design: true
   assets:
      - asset/Icons/
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+     - asset/MoneyPageIcons/
+  fonts:
+     - family: default
+       fonts:
+         - asset: asset/Fonts/Outfit-VariableFont_wght.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

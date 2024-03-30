@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
           onGenerateRoute: RoutesOfApp.genRoutes,
           title: 'Dollar Pos',
           theme: ThemeData(
+            fontFamily: 'default',
             colorScheme: ColorScheme.fromSeed(
                 seedColor: const Color(0xff90330E),
                 onSecondary: const Color(0xff90330E),
