@@ -17,157 +17,6 @@ class MoneyPage extends HookWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 0),
         children: [
-          // header content
-          // SizedBox(
-          //   width: width,
-          //   height: height * 0.1,
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       // first row icons home and profile and text
-          //       SizedBox(
-          //         width: width * 0.3,
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //           children: [
-          //             /// this is icons row
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //               children: [
-          //                 Padding(
-          //                   padding: EdgeInsets.symmetric(horizontal: 1.w),
-          //                   child: IconButton(
-          //                       onPressed: () {},
-          //                       icon: Icon(
-          //                         Icons.home,
-          //                         size: 12.w,
-          //                         color: Theme.of(context)
-          //                             .colorScheme
-          //                             .onSecondary,
-          //                       )),
-          //                 ),
-          //                 Container(
-          //                   margin: EdgeInsets.symmetric(horizontal: 1.w),
-          //                   alignment: Alignment.center,
-          //                   width: 12.w,
-          //                   height: 40.h,
-          //                   decoration: BoxDecoration(
-          //                       shape: BoxShape.circle,
-          //                       color: Theme.of(context)
-          //                           .colorScheme
-          //                           .onSecondary),
-          //                   child: IconButton(
-          //                       alignment: Alignment.center,
-          //                       onPressed: () {},
-          //                       icon: Icon(
-          //                         Icons.person,
-          //                         size: 8.w,
-          //                         color: Colors.white,
-          //                       )),
-          //                 ),
-          //                 IconButton(
-          //                     onPressed: () {},
-          //                     icon: Icon(
-          //                       Icons.shuffle,
-          //                       size: 12.w,
-          //                       color:
-          //                           Theme.of(context).colorScheme.onSecondary,
-          //                     )),
-          //               ],
-          //             ),
-          //
-          //             /// this is text
-          //             Text(
-          //               'T/A : Mar 28,2003',
-          //               style: TextStyle(
-          //                   fontSize: 5.sp,
-          //                   color: Colors.black,
-          //                   fontWeight: FontWeight.bold),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //
-          //       /// logo image
-          //       Padding(
-          //         padding: EdgeInsets.symmetric(horizontal: 10.w),
-          //         child: Image.asset(
-          //           'asset/Icons/Logo.png',
-          //           width: 85.w,
-          //           height: 80.h,
-          //           fit: BoxFit.cover,
-          //         ),
-          //       ),
-          //
-          //       /// second row of all icons and support
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.end,
-          //         children: [
-          //           /// date and time column
-          //           Padding(
-          //             padding: EdgeInsets.symmetric(horizontal: 3.w),
-          //             child: Column(
-          //               mainAxisAlignment: MainAxisAlignment.center,
-          //               crossAxisAlignment: CrossAxisAlignment.center,
-          //               children: [
-          //                 Text(
-          //                   "Thu,Mar 28",
-          //                   style: TextStyle(
-          //                       fontSize: 5.sp,
-          //                       color:
-          //                           Theme.of(context).colorScheme.onSecondary,
-          //                       fontWeight: FontWeight.bold),
-          //                 ),
-          //                 Text(
-          //                   "04:04:52 AM",
-          //                   style: TextStyle(
-          //                       fontSize: 5.sp,
-          //                       color:
-          //                           Theme.of(context).colorScheme.onSecondary,
-          //                       fontWeight: FontWeight.bold),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //
-          //           //icons
-          //           IconButton(
-          //               onPressed: () {
-          //                 isSwap.value = !isSwap.value;
-          //               },
-          //               icon: Icon(
-          //                 IconlyBold.filter,
-          //                 size: 12.w,
-          //                 color: Theme.of(context).colorScheme.onSecondary,
-          //               )),
-          //           IconButton(
-          //               onPressed: () {},
-          //               icon: Icon(
-          //                 IconlyBold.category,
-          //                 size: 12.w,
-          //                 color: Theme.of(context).colorScheme.onSecondary,
-          //               )),
-          //
-          //           IconButton(
-          //               onPressed: () {},
-          //               icon: Icon(
-          //                 IconlyBold.lock,
-          //                 size: 12.w,
-          //                 color: Theme.of(context).colorScheme.onSecondary,
-          //               )),
-          //           IconButton(
-          //               onPressed: () {},
-          //               icon: Icon(
-          //                 Icons.support_agent,
-          //                 size: 12.w,
-          //                 color: Theme.of(context).colorScheme.onSecondary,
-          //               )),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // main content
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 3.h),
@@ -1593,84 +1442,87 @@ class MoneyPage extends HookWidget {
             width: width,
             height: height * 0.09,
             color: Colors.black,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                        padding: const EdgeInsets.symmetric(vertical: 0),
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.print,
-                          size: 12.w,
-                          color: Colors.white,
-                        )),
-                    Text(
-                      'Last\nprint',
-                      style: TextStyle(
-                          fontSize: 5.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                        padding: const EdgeInsets.symmetric(vertical: 0),
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.print_outlined,
-                          size: 12.w,
-                          color: Colors.white,
-                        )),
-                    Text(
-                      'Reprint',
-                      style: TextStyle(
-                          fontSize: 5.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.access_time_outlined,
-                  name: 'abc',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.discount,
-                  name: 'Discount',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.security,
-                  name: 'Check',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.store,
-                  name: 'Store',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.newspaper,
-                  name: 'Info',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.pause_circle_filled,
-                  name: 'Stop',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.skip_next_rounded,
-                  name: 'next',
-                ),
-                const IconsButtonsBottom(
-                  icons: Icons.price_change,
-                  name: 'Chg-AMT',
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.exit_to_app_outlined,
-                        size: 12.w, color: Colors.white))
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                          padding: const EdgeInsets.symmetric(vertical: 0),
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.print,
+                            size: 12.w,
+                            color: Colors.white,
+                          )),
+                      Text(
+                        'Last\nprint',
+                        style: TextStyle(
+                            fontSize: 5.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                          padding: const EdgeInsets.symmetric(vertical: 0),
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.print_outlined,
+                            size: 12.w,
+                            color: Colors.white,
+                          )),
+                      Text(
+                        'Reprint',
+                        style: TextStyle(
+                            fontSize: 5.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.access_time_outlined,
+                    name: 'abc',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.discount,
+                    name: 'Discount',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.security,
+                    name: 'Check',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.store,
+                    name: 'Store',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.newspaper,
+                    name: 'Info',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.pause_circle_filled,
+                    name: 'Stop',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.skip_next_rounded,
+                    name: 'next',
+                  ),
+                  const IconsButtonsBottom(
+                    icons: Icons.price_change,
+                    name: 'Chg-AMT',
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.exit_to_app_outlined,
+                          size: 12.w, color: Colors.white))
+                ],
+              ),
             ),
           )
         ],

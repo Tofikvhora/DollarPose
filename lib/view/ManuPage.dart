@@ -35,6 +35,7 @@ class ManuPage extends HookWidget {
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
+                  margin: EdgeInsets.symmetric(vertical: 10.h),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
@@ -42,20 +43,22 @@ class ManuPage extends HookWidget {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(
                             'asset/Icons/Logo.png',
-                            width: 60.w,
-                            height: 60.h,
-                            fit: BoxFit.fitWidth,
+                            width: 90.w,
+                            height: 70.h,
+                            fit: BoxFit.cover,
                           ),
                           IconButton(
+                              padding: EdgeInsets.zero,
                               onPressed: () {
                                 _key.currentState!.closeDrawer();
                               },
                               icon: Icon(
                                 Icons.cancel,
-                                size: 8.w,
+                                size: 13.w,
                                 color: Colors.black,
                               )),
                         ],

@@ -29,16 +29,16 @@ class ItemPage extends HookWidget {
                   width: MediaQuery.of(context).size.width * 0.31,
                   height: MediaQuery.of(context).size.height * 0.76,
                   color: Colors.grey[300],
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 0),
                   child: SingleChildScrollView(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset(
                           'asset/Icons/Logo.png',
                           fit: BoxFit.cover,
                           width: 120.w,
-                          height: 250.h,
+                          height: 200.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -318,7 +318,7 @@ class ItemPage extends HookWidget {
                             child: Align(
                               alignment: Alignment.topRight,
                               child: DataTable(
-                                columnSpacing: 1.w,
+                                columnSpacing: 13.w,
                                 horizontalMargin: 1.w,
                                 headingRowHeight: 42.h,
                                 headingTextStyle: TextStyle(
@@ -389,55 +389,58 @@ class ItemPage extends HookWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.12,
             color: Colors.black,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Ionicons.desktop,
-                  name: 'Department',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.change_circle_rounded,
-                  name: 'Price change',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.history,
-                  name: 'History',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.group,
-                  name: 'Add to Group',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.refresh,
-                  name: 'Refresh',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.print,
-                  name: 'Print label',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.tag,
-                  name: 'Tag Along',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.clean_hands_outlined,
-                  name: 'Chnage UPC',
-                ),
-                IconsButtonsBottom(
-                  onTap: () {},
-                  icons: Icons.price_change,
-                  name: 'Change Price',
-                ),
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Ionicons.desktop,
+                    name: 'Department',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.change_circle_rounded,
+                    name: 'Price change',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.history,
+                    name: 'History',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.group,
+                    name: 'Add to Group',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.refresh,
+                    name: 'Refresh',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.print,
+                    name: 'Print label',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.tag,
+                    name: 'Tag Along',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.clean_hands_outlined,
+                    name: 'Chnage UPC',
+                  ),
+                  IconsButtonsBottom(
+                    onTap: () {},
+                    icons: Icons.price_change,
+                    name: 'Change Price',
+                  ),
+                ],
+              ),
             ),
           )
         ],
