@@ -13,7 +13,6 @@ class DialogsServices {
       'No Return',
       'In-active'
     ];
-    print('dialog open');
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Dialog(
@@ -111,7 +110,11 @@ class DialogsServices {
                             itemBuilder: (context, index) {
                               return Row(
                                 children: [
-                                  Checkbox(value: true, onChanged: (value) {}),
+                                  Checkbox(
+                                    value: true,
+                                    onChanged: (value) {},
+                                    checkColor: Colors.white,
+                                  ),
                                   Text(
                                     dummyList[index],
                                     style: TextStyle(
@@ -530,6 +533,345 @@ class DialogsServices {
       ),
     );
   }
+
+  static changeUpc(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.symmetric(vertical: 60.h, horizontal: 20.w),
+        children: [
+          Container(
+            width: width * 0.8,
+            height: height * 0.65,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: Colors.black),
+            child: Column(
+              children: [
+                commonHeading(context, 'Change UPC'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      children: [
+                        Text('UPC/Barcode   : ',
+                            style: TextStyle(
+                                fontSize: 5.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        SizedBox(width: 2.w),
+                        SizedBox(
+                          width: width * 0.4,
+                          height: height * 0.065,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            textAlignVertical: TextAlignVertical.center,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 6.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                            decoration: InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.cancel,
+                                size: 9.w,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                              contentPadding: EdgeInsets.zero,
+                              hintStyle: TextStyle(
+                                  fontSize: 5.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(5)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(5)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(5)),
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 2.w),
+                      ],
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: width * 0.09,
+                      height: height * 0.065,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Theme.of(context).colorScheme.onSecondary,
+                      ),
+                      child: Text(
+                        'AUTO',
+                        style: TextStyle(
+                            fontSize: 6.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: width * 0.12,
+                      height: height * 0.065,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.white),
+                        color: Colors.black,
+                      ),
+                      child: Text(
+                        'Add To list',
+                        style: TextStyle(
+                            fontSize: 6.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 14.h),
+                  width: width * 0.76,
+                  height: height * 0.37,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.white),
+                      color: Colors.black),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    child: DataTable(
+                        columnSpacing: 60.w,
+                        headingRowHeight: 39.h,
+                        dataTextStyle: TextStyle(
+                            fontSize: 4.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        headingTextStyle: TextStyle(
+                            fontSize: 5.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        headingRowColor: MaterialStatePropertyAll<Color>(
+                            Theme.of(context).colorScheme.onSecondary),
+                        columns: const [
+                          DataColumn(
+                            label: Text('UPC List'),
+                          ),
+                          DataColumn(
+                            label: Text(
+                              'Main UPC',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          DataColumn(
+                            label: Text(
+                              '',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                        rows:
+                            // TODO: this is static data just add your data list and map data copy below code and past into map
+                            [
+                          DataRow(cells: [
+                            const DataCell(Text('1')),
+                            DataCell(Checkbox(
+                                value: true,
+                                checkColor: Colors.white,
+                                onChanged: (value) {})),
+                            DataCell(Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.delete,
+                                  size: 10.w,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                                Icon(
+                                  Icons.copy,
+                                  size: 10.w,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ],
+                            )),
+                          ])
+                        ]),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                    alignment: Alignment.center,
+                    width: width * 0.1,
+                    height: height * 0.06,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+                    child: Text(
+                      'SAVE',
+                      style: TextStyle(
+                          fontSize: 6.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static changePriceDialogs(BuildContext context, Widget keypad) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 60.h),
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            color: Colors.black,
+            width: width * 0.8,
+            height: height * 0.68,
+            child: Column(
+              children: [
+                commonHeading(context, 'CHANGE PRICE,COST,QTY'),
+                SizedBox(height: 10.h),
+                Row(
+                  children: [
+                    Container(
+                      width: width * 0.62,
+                      height: height * 0.56,
+                      color: Colors.black,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      "RETAIL PRICE  :",
+                                      style: TextStyle(
+                                          fontSize: 5.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.35,
+                                      height: height * 0.065,
+                                      child: TextField(
+                                        keyboardType: TextInputType.number,
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 6.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                        decoration: InputDecoration(
+                                          suffixIcon: Icon(
+                                            Icons.cancel,
+                                            size: 9.w,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ),
+                                          contentPadding: EdgeInsets.zero,
+                                          hintStyle: TextStyle(
+                                              fontSize: 5.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(horizontal: 10.w),
+                            width: width * 0.65,
+                            height: height * 0.07,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.grey.withOpacity(0.5)),
+                            child: const Text(
+                              'LABEL PRINT',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey.withOpacity(0.4),
+                      ),
+                      width: width * 0.28,
+                      height: height * 0.58,
+                      child: keypad,
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 Widget textFieldAndText(
@@ -668,7 +1010,7 @@ Widget dropDownAndText(
                   value,
                   style: TextStyle(
                       fontSize: 5.sp,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
               );

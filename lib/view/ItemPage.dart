@@ -1,3 +1,4 @@
+import 'package:dollarpos/Widgets/KeyPad.dart';
 import 'package:dollarpos/constant/DialogsClass.dart';
 import 'package:dollarpos/utils/StringNavigation.dart';
 import 'package:dollarpos/view/PriceChangePage.dart';
@@ -15,6 +16,9 @@ class ItemPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final _dropDownValue = useState<String?>(null);
+    final _pin = useState<String>('');
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color.fromARGB(0, 0, 0, 0),
       appBar: AppBar(
@@ -464,7 +468,65 @@ class ItemPage extends HookWidget {
                     name: 'Refresh',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            child: Container(
+                              width: width * 0.3,
+                              height: height * 0.29,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.black),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.circleInfo,
+                                    size: 13.w,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
+                                  ),
+                                  Text(
+                                    "Select (QL-810W or QL-800) Printer",
+                                    style: TextStyle(
+                                        fontSize: 5.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: width * 0.09,
+                                      height: height * 0.07,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary),
+                                      child: Text(
+                                        'OK',
+                                        style: TextStyle(
+                                            fontSize: 8.w,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
                     icons: Icons.print,
                     name: 'Print label',
                   ),
@@ -481,12 +543,79 @@ class ItemPage extends HookWidget {
                     name: 'Tag Along',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.changeUpc(context);
+                        },
+                      );
+                    },
                     icons: Icons.clean_hands_outlined,
                     name: 'Change UPC',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.changePriceDialogs(
+                              context,
+                              Column(
+                                children: [
+                                  SizedBox(
+                                      width: width * 0.25,
+                                      height: height * 0.07,
+                                      child: TextFormField(
+                                        readOnly: true,
+                                        initialValue: _pin.value,
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                        textAlignVertical:
+                                            TextAlignVertical.bottom,
+                                        textAlign: TextAlign.right,
+                                        textDirection: TextDirection.rtl,
+                                        decoration: InputDecoration(
+                                          hintText: '0.00',
+                                          hintStyle: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                          prefixIcon: Icon(
+                                            FontAwesomeIcons.usd,
+                                            size: 10.w,
+                                            color: Colors.white,
+                                          ),
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.white)),
+                                          focusedBorder: UnderlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.white)),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white)),
+                                        ),
+                                      )),
+                                  SizedBox(height: 26.h),
+                                  SizedBox(
+                                      width: width * 0.28,
+                                      height: height * 0.45,
+                                      child: KeyPadCustom(pin: _pin.value)),
+                                ],
+                              ));
+                        },
+                      );
+                    },
                     icons: Icons.price_change,
                     name: 'Change Price',
                   ),
