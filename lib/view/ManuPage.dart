@@ -1,4 +1,5 @@
 import 'package:dollarpos/utils/StringNavigation.dart';
+import 'package:dollarpos/view/ActionPage.dart';
 import 'package:dollarpos/view/EmpolyPage.dart';
 import 'package:dollarpos/view/ItemPage.dart';
 import 'package:dollarpos/view/MoneyPage.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ManuPage extends HookWidget {
   static const String route = 'ManuPage';
@@ -30,96 +32,90 @@ class ManuPage extends HookWidget {
           backgroundColor: Colors.black,
           //Theme.of(context).colorScheme.onSecondary,
           elevation: 2,
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              DrawerHeader(
-                  margin: EdgeInsets.symmetric(vertical: 10.h),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'asset/Icons/Logo.png',
-                            width: 90.w,
-                            height: 70.h,
-                            fit: BoxFit.cover,
-                          ),
-                          IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                _key.currentState!.closeDrawer();
-                              },
-                              icon: Icon(
-                                Icons.cancel,
-                                size: 13.w,
-                                color: Colors.black,
-                              )),
-                        ],
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  // Important: Remove any padding from the ListView.
+                  padding: EdgeInsets.zero,
+                  children: [
+                    SafeArea(
+                      child: SizedBox(
+                        height: height * 0.2,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 15.h),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'asset/MoneyPageIcons/Logo_transparent.png',
+                                    width: 30.w,
+                                    height: 75.h,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  )),
-              ListTile(
-                minVerticalPadding: 20.h,
-                leading: Image.asset(
-                  'asset/Icons/cash-machine.png',
-                  width: 10.w,
-                  height: 50.h,
-                  fit: BoxFit.contain,
+                    ),
+                    ListTile(
+                      minVerticalPadding: 20.h,
+                      leading: FaIcon(FontAwesomeIcons.addressBook,
+                          size: 12.w, color: Colors.white),
+                      title: Text(
+                        'Employ Management',
+                        style: TextStyle(
+                            fontSize: 7.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        ActionPage.route.pushOnThis(context);
+                      },
+                    ),
+                    ListTile(
+                      minVerticalPadding: 20.h,
+                      leading: FaIcon(FontAwesomeIcons.sitemap,
+                          size: 12.w, color: Colors.white),
+                      title: Text(
+                        'Item Management',
+                        style: TextStyle(
+                            fontSize: 7.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        ItemPage.route.pushOnThis(context);
+                      },
+                    ),
+                  ],
                 ),
-                title: Text(
-                  'Money Management',
-                  style: TextStyle(
-                      fontSize: 7.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  MoneyPage.route.pushOnThis(context);
-                },
               ),
               ListTile(
                 minVerticalPadding: 20.h,
-                leading: Image.asset(
-                  'asset/Icons/deposit.png',
-                  width: 10.w,
-                  height: 50.h,
-                  fit: BoxFit.contain,
+                titleAlignment: ListTileTitleAlignment.center,
+                leading: FaIcon(
+                  FontAwesomeIcons.close,
+                  color: Colors.red,
+                  size: 12.w,
                 ),
                 title: Text(
-                  'Employ Management',
+                  'EXIT',
                   style: TextStyle(
                       fontSize: 7.sp,
-                      color: Colors.white,
+                      color: Colors.red,
                       fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  EmployPage.route.pushOnThis(context);
-                },
-              ),
-              ListTile(
-                minVerticalPadding: 20.h,
-                leading: Image.asset(
-                  'asset/Icons/check.png',
-                  width: 10.w,
-                  height: 50.h,
-                  fit: BoxFit.contain,
-                ),
-                title: Text(
-                  'Item Management',
-                  style: TextStyle(
-                      fontSize: 7.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  ItemPage.route.pushOnThis(context);
+                  Navigator.pop(context);
                 },
               ),
             ],
@@ -141,8 +137,16 @@ class ManuPage extends HookWidget {
                           },
                           icon: Icon(Icons.menu,
                               size: 17.w,
-                              color:
-                                  Theme.of(context).colorScheme.onSecondary)),
+                              color: Theme.of(context).colorScheme.onPrimary)),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          'asset/MoneyPageIcons/Logo_transparent.png',
+                          width: 150.w,
+                          height: 150.h,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 10.h),
                         child: Row(
@@ -154,20 +158,23 @@ class ManuPage extends HookWidget {
                                 Text('PMS DEMO',
                                     style: TextStyle(
                                         fontSize: 6.sp,
+                                        fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
                                             .colorScheme
                                             .onPrimary)),
                                 Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 3.w),
+                                  margin: EdgeInsets.symmetric(horizontal: 5.w),
                                   height: 70.h,
                                   width: 15.w,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
+                                  decoration: BoxDecoration(
+                                      image: const DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         image: AssetImage(
                                             'asset/Icons/call-center-agent.png'),
                                       ),
-                                      color: Colors.black,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
                                       shape: BoxShape.circle),
                                 )
                               ],
@@ -180,29 +187,108 @@ class ManuPage extends HookWidget {
                                 icon: Icon(
                                   Icons.settings,
                                   size: 12.w,
-                                  color: Colors.black,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                 ))
                           ],
                         ),
                       )
                     ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Image.asset(
-                      'asset/Icons/Logo.png',
-                      width: 250.w,
-                      height: 450.h,
-                      fit: BoxFit.cover,
+                  SizedBox(
+                    height: height * 0.55,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            MoneyPage.route.pushOnThis(context);
+                          },
+                          child: Container(
+                            width: width * 0.25,
+                            height: height * 0.35,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 1.w,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondary
+                                    .withOpacity(0.5)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'asset/Icons/cash-machine.png',
+                                  width: width * 0.13,
+                                  height: height * 0.15,
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
+                                Text(
+                                  'Cash Register',
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            EmployPage.route.pushOnThis(context);
+                          },
+                          child: Container(
+                            width: width * 0.25,
+                            height: height * 0.35,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 1.w,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondary
+                                    .withOpacity(0.5)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'asset/Icons/employees.png',
+                                  width: width * 0.13,
+                                  height: height * 0.15,
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
+                                Text(
+                                  'Clock-in / Out',
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
             Container(
               width: width,
               height: height * 0.06,
-              decoration: const BoxDecoration(color: Colors.black),
+              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2)),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Row(
@@ -220,7 +306,7 @@ class ManuPage extends HookWidget {
                             text: 'PMS DEMO',
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.8),
-                                fontSize: 4.sp),
+                                fontSize: 5.sp),
                           ),
                         ],
                       ),
@@ -239,7 +325,7 @@ class ManuPage extends HookWidget {
                                 text: '08',
                                 style: TextStyle(
                                     color: Colors.white.withOpacity(0.8),
-                                    fontSize: 4.sp),
+                                    fontSize: 5.sp),
                               ),
                             ],
                           ),
@@ -258,7 +344,7 @@ class ManuPage extends HookWidget {
                                   text: '2.0.6',
                                   style: TextStyle(
                                       color: Colors.white.withOpacity(0.8),
-                                      fontSize: 4.sp),
+                                      fontSize: 5.sp),
                                 ),
                               ],
                             ),

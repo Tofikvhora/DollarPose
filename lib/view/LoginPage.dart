@@ -33,7 +33,7 @@ class LoginPage extends HookWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'asset/Icons/Logo.png',
+                  'asset/MoneyPageIcons/Logo_transparent.png',
                   height: height * 0.35,
                   width: width * 0.28,
                 ),
@@ -43,7 +43,7 @@ class LoginPage extends HookWidget {
                   width: width * 0.6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.black12.withOpacity(0.05),
+                    color: Colors.grey.withOpacity(0.3),
                   ),
                   child: Column(
                     children: [
@@ -60,26 +60,24 @@ class LoginPage extends HookWidget {
                         height: height * 0.095,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary)),
+                            border: Border.all(color: Colors.white)),
                         child: DropdownButton(
-                          focusColor: Colors.black12.withOpacity(0.00),
+                          focusColor: Colors.white.withOpacity(0.1),
                           value: _dropDownValue.value,
                           underline: const SizedBox(),
                           elevation: 10,
                           isExpanded: true,
                           isDense: false,
                           borderRadius: BorderRadius.circular(10),
-                          dropdownColor: Colors.white,
+                          dropdownColor: Colors.black.withOpacity(0.9),
                           enableFeedback: false,
                           iconSize: 18.w,
-                          iconEnabledColor: Colors.black,
+                          iconEnabledColor: Colors.white,
                           hint: Text(
                             '<Select Server>',
                             style: TextStyle(
                                 fontSize: 9.sp,
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                           items: <String>[
@@ -95,7 +93,7 @@ class LoginPage extends HookWidget {
                                 value,
                                 style: TextStyle(
                                     fontSize: 9.sp,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             );
@@ -121,12 +119,12 @@ class LoginPage extends HookWidget {
                         child: TextField(
                           style: TextStyle(
                               fontSize: 8.sp,
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold),
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                                 fontSize: 8.sp,
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                             hintText: 'Email Address',
                             suffixIcon: Padding(
@@ -138,28 +136,20 @@ class LoginPage extends HookWidget {
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                             errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                             focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
@@ -176,12 +166,12 @@ class LoginPage extends HookWidget {
                           obscureText: isVisible.value ? false : true,
                           style: TextStyle(
                               fontSize: 8.sp,
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold),
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                                 fontSize: 8.sp,
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                             hintText: 'Password',
                             suffixIcon: IconButton(
@@ -198,28 +188,20 @@ class LoginPage extends HookWidget {
                               },
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                             errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                             focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),

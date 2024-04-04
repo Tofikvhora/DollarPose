@@ -1,6 +1,10 @@
+import 'package:dollarpos/constant/DialogsClass.dart';
+import 'package:dollarpos/utils/StringNavigation.dart';
+import 'package:dollarpos/view/PriceChangePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -10,13 +14,26 @@ class ItemPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _dropDownValue = useState<String?>(null);
     return Scaffold(
+      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
       appBar: AppBar(
+        leading: IconButton(
+          icon: FaIcon(
+            FontAwesomeIcons.arrowLeft,
+            size: 10.w,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.black.withOpacity(0.5),
         title: Text(
           'Item Management',
           style: TextStyle(
               fontSize: 8.sp,
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.bold),
         ),
       ),
@@ -28,15 +45,15 @@ class ItemPage extends HookWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.31,
                   height: MediaQuery.of(context).size.height * 0.76,
-                  color: Colors.grey[300],
+                  color: Colors.grey.withOpacity(0.3),
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset(
-                          'asset/Icons/Logo.png',
-                          fit: BoxFit.cover,
+                          'asset/Icons/Logo_transparent.png',
+                          fit: BoxFit.fitHeight,
                           width: 120.w,
                           height: 200.h,
                         ),
@@ -47,31 +64,39 @@ class ItemPage extends HookWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xff90330E),
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
                                   children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add logic for add button
+                                    InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return DialogsServices
+                                                .filterDialogs(context,
+                                                    _dropDownValue.value);
                                           },
-                                          child: Padding(
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 2.w),
                                             child: const Icon(IconlyBold.filter,
                                                 color: Colors.white),
                                           ),
-                                        ),
-                                        const Text('Filter',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.white)),
-                                      ],
+                                          const Text('Filter',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white)),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -87,7 +112,8 @@ class ItemPage extends HookWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xff90330E),
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -114,7 +140,8 @@ class ItemPage extends HookWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xff90330E),
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -143,7 +170,8 @@ class ItemPage extends HookWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xff90330E),
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -167,7 +195,8 @@ class ItemPage extends HookWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xff90330E),
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -195,7 +224,7 @@ class ItemPage extends HookWidget {
                 Expanded(
                   flex: 3,
                   child: Container(
-                    color: Colors.white,
+                    color: Colors.black,
                     padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,7 +241,7 @@ class ItemPage extends HookWidget {
                                     child: TextField(
                                       style: TextStyle(
                                           fontSize: 6.sp,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                       decoration: InputDecoration(
                                         suffixIcon: IconButton(
@@ -222,18 +251,20 @@ class ItemPage extends HookWidget {
                                             size: 10.w,
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .onSecondary,
+                                                .onPrimary,
                                           ),
                                         ),
                                         hintText: 'UPC',
                                         hintStyle: TextStyle(
-                                          fontSize: 6.sp,
-                                        ),
+                                            fontSize: 6.sp,
+                                            color: Colors.white),
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                            color: Color(0xff90330E),
+                                          borderSide: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
                                             width: 10,
                                           ),
                                         ),
@@ -250,7 +281,7 @@ class ItemPage extends HookWidget {
                                   TextField(
                                     style: TextStyle(
                                         fontSize: 6.sp,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     decoration: InputDecoration(
                                       suffixIcon: IconButton(
@@ -260,13 +291,12 @@ class ItemPage extends HookWidget {
                                           Icons.cancel,
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .onSecondary,
+                                              .onPrimary,
                                         ),
                                       ),
                                       hintText: 'Item Name',
                                       hintStyle: TextStyle(
-                                        fontSize: 6.sp,
-                                      ),
+                                          fontSize: 6.sp, color: Colors.white),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: const BorderSide(
@@ -285,17 +315,22 @@ class ItemPage extends HookWidget {
                         Row(
                           children: [
                             Checkbox(
+                              activeColor:
+                                  Theme.of(context).colorScheme.onPrimary,
+                              checkColor: Colors.white,
                               value: true,
                               onChanged: (value) {},
                             ),
                             const Text("Include active item",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
                             const Spacer(),
                             Text(
                               "Total : ",
                               style: TextStyle(
                                   fontSize: 6.sp,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(width: 5),
@@ -305,7 +340,7 @@ class ItemPage extends HookWidget {
                                 '12000',
                                 style: TextStyle(
                                     fontSize: 6.sp,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -395,12 +430,21 @@ class ItemPage extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.departmentDialogs(context);
+                        },
+                      );
+                    },
                     icons: Ionicons.desktop,
-                    name: 'Department',
+                    name: 'Departments',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      PriceChange.route.pushOnThis(context);
+                    },
                     icons: Icons.change_circle_rounded,
                     name: 'Price change',
                   ),
@@ -425,14 +469,21 @@ class ItemPage extends HookWidget {
                     name: 'Print label',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.tagAnalog(context);
+                        },
+                      );
+                    },
                     icons: Icons.tag,
                     name: 'Tag Along',
                   ),
                   IconsButtonsBottom(
                     onTap: () {},
                     icons: Icons.clean_hands_outlined,
-                    name: 'Chnage UPC',
+                    name: 'Change UPC',
                   ),
                   IconsButtonsBottom(
                     onTap: () {},

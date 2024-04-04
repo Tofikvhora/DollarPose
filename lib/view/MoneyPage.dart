@@ -1,7 +1,10 @@
+import 'package:dollarpos/Widgets/KeyPad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ionicons/ionicons.dart';
 
 class MoneyPage extends HookWidget {
   static const String route = 'MoneyPage';
@@ -9,6 +12,7 @@ class MoneyPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _pin = useState<String>('');
     final isLotto = useState(true);
     final isSwap = useState(true);
     final width = MediaQuery.of(context).size.width;
@@ -18,1422 +22,1323 @@ class MoneyPage extends HookWidget {
         padding: const EdgeInsets.symmetric(vertical: 0),
         children: [
           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 3.h),
+            child: Container(
+              color: Colors.grey.withOpacity(0.5),
+              width: width,
+              height: height * 0.1,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // first container of main content
-                  isSwap.value
-                      ? Row(
+                  // first row icons home and profile and text
+                  // home icons
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    child: SizedBox(
+                      width: width * 0.3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          /// this is icons row
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.house,
+                                    size: 12.w,
+                                    color: Colors.white.withOpacity(0.5),
+                                  )),
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.userAstronaut,
+                                    size: 12.w,
+                                    color: Colors.white.withOpacity(0.5),
+                                  )),
+                            ],
+                          ),
+
+                          /// this is text
+                          Text(
+                            'T/A : Mar 28,2003',
+                            style: TextStyle(
+                                fontSize: 5.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  // logo
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Image.asset(
+                      'asset/Icons/Logo_transparent.png',
+                      width: 85.w,
+                      height: 80.h,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+
+                  // other icons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      /// date and time column
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 1.w, vertical: 1.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              width: width * 0.41,
-                              height: height * 0.78,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 12.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        // first icons
-                                        Container(
-                                          width: 15.w,
-                                          decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary,
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          height: 38.h,
-                                          alignment: Alignment.center,
-                                          child: const Icon(
-                                            IconlyBold.category,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        // upc text field
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 40.w,
-                                          height: 40.h,
-                                          child: TextField(
-                                            textAlignVertical:
-                                                TextAlignVertical.center,
-                                            decoration: InputDecoration(
-                                              hintText: 'UPC',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 4.sp,
-                                                  color: Colors.black),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .black)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
-                                        // item text field
-                                        SizedBox(
-                                          width: 75.w,
-                                          height: 40.h,
-                                          child: TextField(
-                                            decoration: InputDecoration(
-                                              hintText: 'Items Name/SKU',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 3.9.sp,
-                                                  color: Colors.black),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .black)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  // data table
-                                  Expanded(
-                                    child: DataTable(
-                                        columnSpacing: 20.w,
-                                        headingRowHeight: 35.h,
-                                        headingTextStyle: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        headingRowColor:
-                                            const MaterialStatePropertyAll<
-                                                Color>(Colors.black),
-                                        columns: const [
-                                          DataColumn(
-                                            label: Text('UPC'),
-                                          ),
-                                          DataColumn(
-                                            label: Text('Name'),
-                                          ),
-                                          DataColumn(
-                                            label: Text('QTY'),
-                                          ),
-                                          DataColumn(
-                                            label: Text('TOTAL'),
-                                          ),
-                                        ],
-                                        rows: const [
-                                          DataRow(cells: [
-                                            DataCell(Text('1')),
-                                            DataCell(Text('Arshik')),
-                                            DataCell(Text('5644645')),
-                                            DataCell(Text(
-                                              '15000',
-                                            )),
-                                          ])
-                                        ]),
-                                  ),
-                                  // divider
-                                  Divider(
-                                    height: 17.h,
-                                    color: Colors.black12,
-                                    thickness: 1.w,
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              "Thu,Mar 28",
+                              style: TextStyle(
+                                  fontSize: 5.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              width: width * 0.58,
-                              height: height * 0.78,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          // TODO:  add Some logic
-                                          isLotto.value = true;
-                                        },
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          width: width * 0.1,
-                                          height: height * 0.065,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: isLotto.value == true
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary
-                                                  : Colors.black38),
-                                          child: Text(
-                                            'Lotto',
-                                            style: TextStyle(
-                                                fontSize: 6.sp,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          // TODO:  add Some logic
-                                          isLotto.value = false;
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 3.w),
-                                          alignment: Alignment.center,
-                                          width: width * 0.1,
-                                          height: height * 0.065,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: isLotto.value == false
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary
-                                                  : Colors.black38),
-                                          child: Text(
-                                            'Department',
-                                            style: TextStyle(
-                                                fontSize: 6.sp,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(vertical: 7.h),
-                                    height: height * 0.69,
-                                    color: Colors.black38.withOpacity(0.1),
-                                    child: Column(
-                                      children: [
-                                        //  subtotal and other details in row item
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: width * 0.4,
-                                              height: height * 0.502,
-                                              child: isLotto.value == true
-                                                  ? GridView.builder(
-                                                      scrollDirection:
-                                                          Axis.vertical,
-                                                      shrinkWrap: true,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 5.w,
-                                                              vertical: 9.h),
-                                                      itemCount: 6,
-                                                      gridDelegate:
-                                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                                              crossAxisCount:
-                                                                  2),
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        return Container(
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      1.w,
-                                                                  vertical:
-                                                                      3.h),
-                                                          width: width * 0.2,
-                                                          height: height * 0.03,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              color:
-                                                                  Colors.white),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Image.asset(
-                                                                'asset/Icons/cash-machine.png',
-                                                                width: 25.w,
-                                                                height: 80.h,
-                                                                fit: BoxFit
-                                                                    .fitWidth,
-                                                              ),
-                                                              Text(
-                                                                "NonTax",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        6.sp,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    )
-                                                  : Container(),
-                                            ),
-                                            Container(
-                                              width: 1.w,
-                                              height: height * 0.54,
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: 5.w),
-                                              color:
-                                                  Colors.black.withOpacity(0.3),
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                SizedBox(
-                                                  width: 50.w,
-                                                  height: 345.h,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      const Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          RichTextReuse(
-                                                            title:
-                                                                'SubTotal         ',
-                                                            amount:
-                                                                '      \$ 0.00',
-                                                          ),
-                                                          RichTextReuse(
-                                                            title:
-                                                                'Discount         ',
-                                                            amount:
-                                                                '      \$ 0.00',
-                                                          ),
-                                                          RichTextReuse(
-                                                            title:
-                                                                'Tax                  ',
-                                                            amount:
-                                                                '      \$ 0.00',
-                                                          ),
-                                                          RichTextReuse(
-                                                            title:
-                                                                'SurChange      ',
-                                                            amount:
-                                                                '     \$ 0.00',
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Divider(
-                                                        color: Colors.black12,
-                                                        height: 2.h,
-                                                        thickness: 1.w,
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    3.w),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              '0',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      9.sp,
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .onSecondary,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              'Items',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      6.sp,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Divider(
-                                                        color: Colors.black12,
-                                                        height: 2.h,
-                                                        thickness: 1.w,
-                                                      ),
-                                                      Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        width: width * 0.16,
-                                                        height: height * 0.17,
-                                                        // color: Theme.of(context)
-                                                        //     .colorScheme
-                                                        //     .onSecondary,
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            Text(
-                                                              'Change Due',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      6.sp,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              '\$0.00',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      7.sp,
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .onSecondary,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              'Check out',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      6.sp,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 10.h),
-                                        Divider(
-                                          height: 1,
-                                          color: Colors.black12,
-                                          thickness: 1.w,
-                                        ),
-                                        // amount short
-                                        Row(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 3.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                'Card',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$ 5',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$ 10',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$ 20',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$50',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$100',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 34.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                'Exact AMT',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
-                      :
-                      // second container of main content
-                      Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.58,
-                              height: height * 0.78,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          // TODO:  add Some logic
-                                        },
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          width: width * 0.1,
-                                          height: height * 0.065,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary),
-                                          child: Text(
-                                            'Lotto',
-                                            style: TextStyle(
-                                                fontSize: 6.sp,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          // TODO:  add Some logic
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 3.w),
-                                          alignment: Alignment.center,
-                                          width: width * 0.1,
-                                          height: height * 0.065,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.black38),
-                                          child: Text(
-                                            'Department',
-                                            style: TextStyle(
-                                                fontSize: 6.sp,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(vertical: 7.h),
-                                    height: height * 0.69,
-                                    color: Colors.black38.withOpacity(0.1),
-                                    child: Column(
-                                      children: [
-                                        //  subtotal and other details in row item
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: width * 0.4,
-                                              height: height * 0.502,
-                                              child: GridView.builder(
-                                                scrollDirection: Axis.vertical,
-                                                shrinkWrap: true,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 5.w,
-                                                    vertical: 9.h),
-                                                itemCount: 6,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 4),
-                                                itemBuilder: (context, index) {
-                                                  return Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 1.w,
-                                                            vertical: 3.h),
-                                                    width: width * 0.2,
-                                                    height: height * 0.09,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        color: Colors.white),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'asset/Icons/cash-machine.png',
-                                                          width: 15.w,
-                                                          height: 50.h,
-                                                          fit: BoxFit.fitWidth,
-                                                        ),
-                                                        Text(
-                                                          "NonTax",
-                                                          style: TextStyle(
-                                                              fontSize: 5.sp,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 1.w,
-                                              height: height * 0.54,
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: 5.w),
-                                              color:
-                                                  Colors.black.withOpacity(0.3),
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                SizedBox(
-                                                  width: 50.w,
-                                                  height: 345.h,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      const Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          RichTextReuse(
-                                                            title:
-                                                                'SubTotal         ',
-                                                            amount:
-                                                                '      \$ 0.00',
-                                                          ),
-                                                          RichTextReuse(
-                                                            title:
-                                                                'Discount         ',
-                                                            amount:
-                                                                '      \$ 0.00',
-                                                          ),
-                                                          RichTextReuse(
-                                                            title:
-                                                                'Tax                  ',
-                                                            amount:
-                                                                '      \$ 0.00',
-                                                          ),
-                                                          RichTextReuse(
-                                                            title:
-                                                                'SurChange      ',
-                                                            amount:
-                                                                '     \$ 0.00',
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Divider(
-                                                        color: Colors.black12,
-                                                        height: 2.h,
-                                                        thickness: 1.w,
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    3.w),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              '0',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      9.sp,
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .onSecondary,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              'Items',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      6.sp,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Divider(
-                                                        color: Colors.black12,
-                                                        height: 2.h,
-                                                        thickness: 1.w,
-                                                      ),
-                                                      Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        width: width * 0.16,
-                                                        height: height * 0.17,
-                                                        // color: Theme.of(context)
-                                                        //     .colorScheme
-                                                        //     .onSecondary,
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            Text(
-                                                              'Change Due',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      6.sp,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              '\$0.00',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      7.sp,
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .onSecondary,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              'Check out',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      6.sp,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 10.h),
-                                        Divider(
-                                          height: 1,
-                                          color: Colors.black12,
-                                          thickness: 1.w,
-                                        ),
-                                        // amount short
-                                        Row(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 3.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                'Card',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$ 5',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$ 10',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$ 20',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$50',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 25.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                '\$100',
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 4.h,
-                                                  horizontal: 1.w),
-                                              width: 34.w,
-                                              height: 80.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSecondary),
-                                              child: Text(
-                                                'Exact AMT',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 7.sp,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 1.w, vertical: 1.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: Colors.black38)),
-                              width: width * 0.41,
-                              height: height * 0.78,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 12.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        // first icons
-                                        Container(
-                                          width: 15.w,
-                                          decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary,
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          height: 38.h,
-                                          alignment: Alignment.center,
-                                          child: const Icon(
-                                            IconlyBold.category,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        // upc text field
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 40.w,
-                                          height: 40.h,
-                                          child: TextField(
-                                            textAlignVertical:
-                                                TextAlignVertical.center,
-                                            decoration: InputDecoration(
-                                              hintText: 'UPC',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 4.sp,
-                                                  color: Colors.black),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .black)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
-                                        // item text field
-                                        SizedBox(
-                                          width: 75.w,
-                                          height: 40.h,
-                                          child: TextField(
-                                            decoration: InputDecoration(
-                                              hintText: 'Items Name/SKU',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 3.9.sp,
-                                                  color: Colors.black),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .black)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  // data table
-                                  Expanded(
-                                    child: DataTable(
-                                        columnSpacing: 20.w,
-                                        headingRowHeight: 35.h,
-                                        headingTextStyle: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        headingRowColor:
-                                            const MaterialStatePropertyAll<
-                                                Color>(Colors.black),
-                                        columns: const [
-                                          DataColumn(
-                                            label: Text('UPC'),
-                                          ),
-                                          DataColumn(
-                                            label: Text('Name'),
-                                          ),
-                                          DataColumn(
-                                            label: Text('QTY'),
-                                          ),
-                                          DataColumn(
-                                            label: Text('TOTAL'),
-                                          ),
-                                        ],
-                                        rows: const [
-                                          DataRow(cells: [
-                                            DataCell(Text('1')),
-                                            DataCell(Text('Arshik')),
-                                            DataCell(Text('5644645')),
-                                            DataCell(Text(
-                                              '15000',
-                                            )),
-                                          ])
-                                        ]),
-                                  ),
-                                  // divider
-                                  Divider(
-                                    height: 17.h,
-                                    color: Colors.black12,
-                                    thickness: 1.w,
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              "04:04:52 AM",
+                              style: TextStyle(
+                                  fontSize: 5.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
+                      ),
+
+                      //icons
+                      IconButton(
+                          onPressed: () {
+                            isSwap.value = !isSwap.value;
+                          },
+                          icon: FaIcon(
+                            FontAwesomeIcons.exchange,
+                            size: 12.w,
+                            color: Colors.white.withOpacity(0.5),
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            IconlyBold.category,
+                            size: 12.w,
+                            color: Colors.white.withOpacity(0.5),
+                          )),
+
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: FaIcon(
+                            FontAwesomeIcons.lock,
+                            size: 12.w,
+                            color: Colors.white.withOpacity(0.5),
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Ionicons.help,
+                            size: 12.w,
+                            color: Colors.white.withOpacity(0.5),
+                          )),
+                    ],
+                  ),
+
+                  /// second row of all icons and support
                 ],
               ),
             ),
           ),
-          Container(
-            color: Colors.black12.withOpacity(0.2),
-            width: width,
-            height: height * 0.1,
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 3.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // first row icons home and profile and text
-                // logo
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Image.asset(
-                    'asset/Icons/Logo.png',
-                    width: 85.w,
-                    height: 80.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                // home icons
-                SizedBox(
-                  width: width * 0.3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      /// this is icons row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // first container of main content
+                isSwap.value
+                    ? Row(
                         children: [
-                          InkWell(
-                            splashColor: Colors.black12,
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                child: Image.asset(
-                                  'asset/MoneyPageIcons/house.png',
-                                  width: 13.w,
-                                  height: 50.h,
-                                  fit: BoxFit.fitWidth,
-                                )),
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 1.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            width: width * 0.41,
+                            height: height * 0.73,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 12.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      // first icons
+                                      Container(
+                                        width: 15.w,
+                                        decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary,
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        height: 38.h,
+                                        alignment: Alignment.center,
+                                        child: const Icon(
+                                          IconlyBold.category,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      // upc text field
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: 40.w,
+                                        height: 40.h,
+                                        child: TextField(
+                                          style: TextStyle(
+                                              fontSize: 5.5.sp,
+                                              color: Colors.white),
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          decoration: InputDecoration(
+                                            hintText: 'UPC',
+                                            hintStyle: TextStyle(
+                                                fontSize: 4.sp,
+                                                color: Colors.white),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                            errorBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                          ),
+                                        ),
+                                      ),
+                                      // item text field
+                                      SizedBox(
+                                        width: 75.w,
+                                        height: 40.h,
+                                        child: TextField(
+                                          style: TextStyle(
+                                              fontSize: 6.sp,
+                                              color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: 'Items Name/SKU',
+                                            hintStyle: TextStyle(
+                                                fontSize: 3.9.sp,
+                                                color: Colors.white),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                            errorBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                // data table
+                                Expanded(
+                                  child: DataTable(
+                                      columnSpacing: 20.w,
+                                      headingRowHeight: 35.h,
+                                      dataTextStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      headingTextStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      headingRowColor:
+                                          MaterialStatePropertyAll<Color>(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary),
+                                      columns: const [
+                                        DataColumn(
+                                          label: Text('UPC'),
+                                        ),
+                                        DataColumn(
+                                          label: Text('Name'),
+                                        ),
+                                        DataColumn(
+                                          label: Text('QTY'),
+                                        ),
+                                        DataColumn(
+                                          label: Text('TOTAL'),
+                                        ),
+                                      ],
+                                      rows: const [
+                                        DataRow(cells: [
+                                          DataCell(Text('1')),
+                                          DataCell(Text('Arshik')),
+                                          DataCell(Text('5644645')),
+                                          DataCell(Text(
+                                            '15000',
+                                          )),
+                                        ])
+                                      ]),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        RichTextReuse(
+                                          title: 'SubTotal         ',
+                                          amount: '      \$ 0.00',
+                                        ),
+                                        RichTextReuse(
+                                          title: 'Discount         ',
+                                          amount: '      \$ 0.00',
+                                        ),
+                                        RichTextReuse(
+                                          title: 'Tax                  ',
+                                          amount: '      \$ 0.00',
+                                        ),
+                                        RichTextReuse(
+                                          title: 'SurChange      ',
+                                          amount: '     \$ 0.00',
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8.w),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '0',
+                                            style: TextStyle(
+                                                fontSize: 9.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            'Items',
+                                            style: TextStyle(
+                                                fontSize: 6.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: width * 0.1,
+                                      height: height * 0.17,
+                                      // color: Theme.of(context)
+                                      //     .colorScheme
+                                      //     .onSecondary,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            'Change Due',
+                                            style: TextStyle(
+                                                fontSize: 6.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '\$0.00',
+                                            style: TextStyle(
+                                                fontSize: 7.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            'Check out',
+                                            style: TextStyle(
+                                                fontSize: 6.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3.w),
-                              child: Image.asset(
-                                'asset/MoneyPageIcons/profile.png',
-                                width: 14.w,
-                                height: 50.h,
-                                fit: BoxFit.fitWidth,
-                              )),
-                          Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3.w),
-                              child: Image.asset(
-                                'asset/MoneyPageIcons/suffle.png',
-                                width: 13.w,
-                                height: 50.h,
-                                fit: BoxFit.fitWidth,
-                              )),
+                          // lotto container
+                          Container(
+                            width: width * 0.58,
+                            height: height * 0.76,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        // TODO:  add Some logic
+                                        isLotto.value = true;
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: width * 0.1,
+                                        height: height * 0.065,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: isLotto.value == true
+                                                ? Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary
+                                                : Colors.grey.withOpacity(0.4)),
+                                        child: Text(
+                                          'Lotto',
+                                          style: TextStyle(
+                                              fontSize: 6.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // TODO:  add Some logic
+                                        isLotto.value = false;
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 3.w),
+                                        alignment: Alignment.center,
+                                        width: width * 0.1,
+                                        height: height * 0.065,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: isLotto.value == false
+                                                ? Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary
+                                                : Colors.grey.withOpacity(0.4)),
+                                        child: Text(
+                                          'Department',
+                                          style: TextStyle(
+                                              fontSize: 6.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: height * 0.69,
+                                  width: width,
+                                  color: Colors.black38.withOpacity(0.1),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      //  subtotal and other details in row item
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: width * 0.26,
+                                            height: height * 0.51,
+                                            child: isLotto.value == true
+                                                ? GridView.builder(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 0.h),
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    shrinkWrap: true,
+                                                    itemCount: 6,
+                                                    gridDelegate:
+                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 2),
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 1.w,
+                                                                vertical: 3.h),
+                                                        width: width * 0.15,
+                                                        height: height * 0.03,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.6)),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Image.asset(
+                                                              'asset/Icons/cash-machine.png',
+                                                              width: 25.w,
+                                                              height: 80.h,
+                                                              color:
+                                                                  Colors.white,
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                            ),
+                                                            Text(
+                                                              "NonTax",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  )
+                                                : Container(),
+                                          ),
+                                          Container(
+                                            width: width * 0.28,
+                                            height: height * 0.57,
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                    width: width * 0.25,
+                                                    height: height * 0.06,
+                                                    child: TextFormField(
+                                                      readOnly: true,
+                                                      initialValue: _pin.value,
+                                                      style: TextStyle(
+                                                          fontSize: 12.sp,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                      textAlignVertical:
+                                                          TextAlignVertical
+                                                              .bottom,
+                                                      textAlign:
+                                                          TextAlign.right,
+                                                      textDirection:
+                                                          TextDirection.rtl,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: '0.00',
+                                                        hintStyle: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                        prefixIcon: Icon(
+                                                          FontAwesomeIcons.usd,
+                                                          size: 10.w,
+                                                          color: Colors.white,
+                                                        ),
+                                                        enabledBorder: UnderlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                        focusedBorder: UnderlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                        focusedErrorBorder:
+                                                            UnderlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                      ),
+                                                    )),
+                                                SizedBox(
+                                                    width: width * 0.28,
+                                                    height: height * 0.48,
+                                                    child: KeyPadCustom(
+                                                        pin: _pin.value)),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.h),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 3.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'CARD',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Cash',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Last Print',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Void',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'No Sale',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
-                      ),
-
-                      /// this is text
-                      Text(
-                        'T/A : Mar 28,2003',
-                        style: TextStyle(
-                            fontSize: 5.sp,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
                       )
-                    ],
-                  ),
-                ),
-                // other icons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    /// date and time column
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                    :
+                    // second container of main content
+                    Row(
                         children: [
-                          Text(
-                            "Thu,Mar 28",
-                            style: TextStyle(
-                                fontSize: 5.sp,
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                fontWeight: FontWeight.bold),
+                          SizedBox(
+                            width: width * 0.58,
+                            height: height * 0.78,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        // TODO:  add Some logic
+                                        isLotto.value = true;
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: width * 0.1,
+                                        height: height * 0.065,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: isLotto.value == true
+                                                ? Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary
+                                                : Colors.black38),
+                                        child: Text(
+                                          'Lotto',
+                                          style: TextStyle(
+                                              fontSize: 6.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // TODO:  add Some logic
+                                        isLotto.value = false;
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 3.w),
+                                        alignment: Alignment.center,
+                                        width: width * 0.1,
+                                        height: height * 0.065,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: isLotto.value == false
+                                                ? Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary
+                                                : Colors.black38),
+                                        child: Text(
+                                          'Department',
+                                          style: TextStyle(
+                                              fontSize: 6.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 7.h),
+                                  height: height * 0.69,
+                                  color: Colors.black38.withOpacity(0.1),
+                                  child: Column(
+                                    children: [
+                                      //  subtotal and other details in row item
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: width * 0.4,
+                                            height: height * 0.502,
+                                            child: isLotto.value == true
+                                                ? GridView.builder(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    shrinkWrap: true,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5.w,
+                                                            vertical: 9.h),
+                                                    itemCount: 6,
+                                                    gridDelegate:
+                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 2),
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 1.w,
+                                                                vertical: 3.h),
+                                                        width: width * 0.2,
+                                                        height: height * 0.03,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            color:
+                                                                Colors.white),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Image.asset(
+                                                              'asset/Icons/cash-machine.png',
+                                                              width: 25.w,
+                                                              height: 80.h,
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                            ),
+                                                            Text(
+                                                              "NonTax",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      6.sp,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  )
+                                                : Container(),
+                                          ),
+                                          Container(
+                                            width: 1.w,
+                                            height: height * 0.54,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 5.w),
+                                            color:
+                                                Colors.black.withOpacity(0.3),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.h),
+                                      Divider(
+                                        height: 1,
+                                        color: Colors.black12,
+                                        thickness: 1.w,
+                                      ),
+                                      // amount short
+                                      Row(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 3.w),
+                                            width: 25.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Card',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 25.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              '\$ 5',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 25.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              '\$ 10',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 25.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              '\$ 20',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 25.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              '\$50',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 25.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              '\$100',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 80.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Exact AMT',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            "04:04:52 AM",
-                            style: TextStyle(
-                                fontSize: 5.sp,
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                fontWeight: FontWeight.bold),
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 1.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            width: width * 0.41,
+                            height: height * 0.73,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 12.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      // first icons
+                                      Container(
+                                        width: 15.w,
+                                        decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary,
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        height: 38.h,
+                                        alignment: Alignment.center,
+                                        child: const Icon(
+                                          IconlyBold.category,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      // upc text field
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: 40.w,
+                                        height: 40.h,
+                                        child: TextField(
+                                          style: TextStyle(
+                                              fontSize: 5.5.sp,
+                                              color: Colors.white),
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          decoration: InputDecoration(
+                                            hintText: 'UPC',
+                                            hintStyle: TextStyle(
+                                                fontSize: 4.sp,
+                                                color: Colors.white),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                            errorBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                          ),
+                                        ),
+                                      ),
+                                      // item text field
+                                      SizedBox(
+                                        width: 75.w,
+                                        height: 40.h,
+                                        child: TextField(
+                                          style: TextStyle(
+                                              fontSize: 6.sp,
+                                              color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: 'Items Name/SKU',
+                                            hintStyle: TextStyle(
+                                                fontSize: 3.9.sp,
+                                                color: Colors.white),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white)),
+                                            errorBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.white)),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                // data table
+                                Expanded(
+                                  child: DataTable(
+                                      columnSpacing: 20.w,
+                                      headingRowHeight: 35.h,
+                                      dataTextStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      headingTextStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      headingRowColor:
+                                          MaterialStatePropertyAll<Color>(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary),
+                                      columns: const [
+                                        DataColumn(
+                                          label: Text('UPC'),
+                                        ),
+                                        DataColumn(
+                                          label: Text('Name'),
+                                        ),
+                                        DataColumn(
+                                          label: Text('QTY'),
+                                        ),
+                                        DataColumn(
+                                          label: Text('TOTAL'),
+                                        ),
+                                      ],
+                                      rows: const [
+                                        DataRow(cells: [
+                                          DataCell(Text('1')),
+                                          DataCell(Text('Arshik')),
+                                          DataCell(Text('5644645')),
+                                          DataCell(Text(
+                                            '15000',
+                                          )),
+                                        ])
+                                      ]),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        RichTextReuse(
+                                          title: 'SubTotal         ',
+                                          amount: '      \$ 0.00',
+                                        ),
+                                        RichTextReuse(
+                                          title: 'Discount         ',
+                                          amount: '      \$ 0.00',
+                                        ),
+                                        RichTextReuse(
+                                          title: 'Tax                  ',
+                                          amount: '      \$ 0.00',
+                                        ),
+                                        RichTextReuse(
+                                          title: 'SurChange      ',
+                                          amount: '     \$ 0.00',
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8.w),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '0',
+                                            style: TextStyle(
+                                                fontSize: 9.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            'Items',
+                                            style: TextStyle(
+                                                fontSize: 6.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: width * 0.1,
+                                      height: height * 0.17,
+                                      // color: Theme.of(context)
+                                      //     .colorScheme
+                                      //     .onSecondary,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            'Change Due',
+                                            style: TextStyle(
+                                                fontSize: 6.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '\$0.00',
+                                            style: TextStyle(
+                                                fontSize: 7.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            'Check out',
+                                            style: TextStyle(
+                                                fontSize: 6.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ),
-
-                    //icons
-                    InkWell(
-                      splashColor: Colors.black26,
-                      onTap: () {
-                        isSwap.value = !isSwap.value;
-                      },
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 3.w),
-                          child: Image.asset(
-                            'asset/MoneyPageIcons/switch.png',
-                            width: 13.w,
-                            height: 50.h,
-                            fit: BoxFit.fitWidth,
-                          )),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Image.asset(
-                          'asset/MoneyPageIcons/menu.png',
-                          width: 13.w,
-                          height: 50.h,
-                          fit: BoxFit.fitWidth,
-                        )),
-
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Image.asset(
-                          'asset/MoneyPageIcons/lock.png',
-                          width: 13.w,
-                          height: 50.h,
-                          fit: BoxFit.fitWidth,
-                        )),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Image.asset(
-                          'asset/MoneyPageIcons/customer-service.png',
-                          width: 13.w,
-                          height: 50.h,
-                          fit: BoxFit.fitWidth,
-                        )),
-                  ],
-                ),
-
-                /// second row of all icons and support
               ],
             ),
           ),
@@ -1567,17 +1472,17 @@ class RichTextReuse extends StatelessWidget {
         Text(title,
             style: TextStyle(
                 fontSize: 4.sp,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold)),
         Text(':',
             style: TextStyle(
                 fontSize: 4.sp,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold)),
         Text(amount,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontSize: 4.sp)),
       ],
     );
