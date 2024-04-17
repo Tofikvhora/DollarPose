@@ -872,6 +872,438 @@ class DialogsServices {
       ),
     );
   }
+
+  static priceCheck(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 30.h),
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            color: Colors.black,
+            width: width * 0.8,
+            height: height * 0.9,
+            child: Column(
+              children: [
+                commonHeading(context, 'Price-Check'),
+                SizedBox(
+                  width: width,
+                  height: height * 0.17,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            textFieldAndText(
+                                context, 'UPC                      :', 0.3),
+                            textFieldAndText(
+                                context, 'SKU                      :', 0.3),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            textFieldAndText(
+                                context, 'ItemName            :', 0.3),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: width * 0.13,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10.h, horizontal: 5.w),
+                                  height: height * 0.06,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
+                                  ),
+                                  child: Text(
+                                    'RESET',
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: width * 0.13,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10.h, horizontal: 3.w),
+                                  height: height * 0.06,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
+                                  ),
+                                  child: Text(
+                                    'LOOK-UP',
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: width,
+                  height: height * 0.22,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: width * 0.6,
+                        height: height * 0.3,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  textFieldAndText(context,
+                                      'Size                      :', 0.15),
+                                  textFieldAndText(context,
+                                      'Pack                      :', 0.15),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 10.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  textFieldAndText(context,
+                                      'Unit Cost              :', 0.15),
+                                  textFieldAndText(context,
+                                      'Retail Price               :', 0.15),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 5.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  textFieldAndText(context,
+                                      'QOH                      :', 0.15),
+                                  textFieldAndText(context,
+                                      'Surcharge                 :', 0.15),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("QUANTITY",
+                                  style: TextStyle(
+                                      fontSize: 5.w,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                              Row(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 30.w,
+                                    height: 50.h,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 30.h),
+                                      child: Icon(
+                                        Icons.minimize,
+                                        size: 10.w,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "OR",
+                                    style: TextStyle(
+                                        fontSize: 5.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 30.w,
+                                    height: 50.h,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 10.w,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 20.h),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: true,
+                                onChanged: (value) {},
+                                checkColor: Colors.white,
+                              ),
+                              SizedBox(width: 10.w),
+                              Text(
+                                "APPLIED PROMOTION",
+                                style: TextStyle(
+                                    fontSize: 6.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: width,
+                  height: height * 0.3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: width * 0.28,
+                        height: height * 0.29,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 3.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "TAX",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "PER (%)",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "AMOUNT",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5.h, horizontal: 10.w),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "Total :     \$0.00",
+                                  style: TextStyle(
+                                      fontSize: 6.sp,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: width * 0.28,
+                        height: height * 0.29,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 3.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "QTY",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "PRICE",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: width * 0.28,
+                            height: height * 0.18,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(color: Colors.white)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: true,
+                                        groupValue: 0,
+                                        onChanged: (value) {}),
+                                    Text("5% (5.00%)",
+                                        style: TextStyle(
+                                            fontSize: 6.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: true,
+                                        groupValue: 0,
+                                        onChanged: (value) {}),
+                                    Text("5%OFF",
+                                        style: TextStyle(
+                                            fontSize: 5.sp,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                width: width * 0.13,
+                                height: height * 0.1,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
+                                child: Text(
+                                  "Price w/TAX \n \$0.00",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 5.w,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(width: 5.w),
+                              Container(
+                                alignment: Alignment.center,
+                                width: width * 0.13,
+                                height: height * 0.1,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.grey.withOpacity(0.4),
+                                ),
+                                child: Text(
+                                  "Price w/TAX \n \$0.00",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 5.w,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 Widget textFieldAndText(

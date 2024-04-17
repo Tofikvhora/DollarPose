@@ -132,7 +132,7 @@ class LoginPage extends HookWidget {
                               child: Icon(
                                 Icons.person,
                                 size: 15.w,
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -181,7 +181,7 @@ class LoginPage extends HookWidget {
                                     ? Icons.remove_red_eye
                                     : Icons.visibility_off,
                                 size: 15.w,
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                               onPressed: () {
                                 isVisible.value = !isVisible.value;

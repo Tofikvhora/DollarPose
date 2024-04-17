@@ -1,4 +1,5 @@
 import 'package:dollarpos/view/ActionPage.dart';
+import 'package:dollarpos/view/AddPage.dart';
 import 'package:dollarpos/view/EmpolyPage.dart';
 import 'package:dollarpos/view/ItemPage.dart';
 import 'package:dollarpos/view/LoginPage.dart';
@@ -6,6 +7,8 @@ import 'package:dollarpos/view/ManuPage.dart';
 import 'package:dollarpos/view/MoneyPage.dart';
 import 'package:dollarpos/view/PriceChangePage.dart';
 import 'package:flutter/material.dart';
+
+import '../view/ReprintPage.dart';
 
 class RoutesOfApp {
   static MaterialPageRoute genRoutes(setting) {
@@ -24,6 +27,10 @@ class RoutesOfApp {
         return MaterialPageRoute(builder: (_) => const ActionPage());
       case PriceChange.route:
         return MaterialPageRoute(builder: (_) => const PriceChange());
+      case ReprintPage.route:
+        return MaterialPageRoute(builder: (_) => const ReprintPage());
+      case AddPage.route:
+        return MaterialPageRoute(builder: (_) => const AddPage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

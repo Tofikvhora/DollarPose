@@ -1,6 +1,7 @@
 import 'package:dollarpos/Widgets/KeyPad.dart';
 import 'package:dollarpos/constant/DialogsClass.dart';
 import 'package:dollarpos/utils/StringNavigation.dart';
+import 'package:dollarpos/view/AddPage.dart';
 import 'package:dollarpos/view/PriceChangePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -65,27 +66,26 @@ class ItemPage extends HookWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return DialogsServices
-                                                .filterDialogs(context,
-                                                    _dropDownValue.value);
-                                          },
-                                        );
-                                      },
-                                      child: Row(
+                              child: InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return DialogsServices.filterDialogs(
+                                          context, _dropDownValue.value);
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -101,8 +101,8 @@ class ItemPage extends HookWidget {
                                                   color: Colors.white)),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -113,29 +113,34 @@ class ItemPage extends HookWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Add logic for edit button
-                                      },
-                                      child: const Icon(Icons.add,
-                                          color: Colors.white),
-                                    ),
-                                    const Text('Add',
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.white)),
-                                  ],
+                              child: InkWell(
+                                onTap: () {
+                                  AddPage.route.pushOnThis(context);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: const Icon(Icons.add,
+                                            color: Colors.white),
+                                      ),
+                                      const Text('Add',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white)),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -358,6 +363,10 @@ class ItemPage extends HookWidget {
                               alignment: Alignment.topRight,
                               child: DataTable(
                                 columnSpacing: 13.w,
+                                dataTextStyle: TextStyle(
+                                    fontSize: 5.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                                 horizontalMargin: 1.w,
                                 headingRowHeight: 42.h,
                                 headingTextStyle: TextStyle(

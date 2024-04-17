@@ -1,4 +1,7 @@
 import 'package:dollarpos/Widgets/KeyPad.dart';
+import 'package:dollarpos/constant/DialogsClass.dart';
+import 'package:dollarpos/utils/StringNavigation.dart';
+import 'package:dollarpos/view/ReprintPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -432,7 +435,7 @@ class MoneyPage extends HookWidget {
                             ),
                           ),
                           // lotto container
-                          Container(
+                          SizedBox(
                             width: width * 0.58,
                             height: height * 0.76,
                             child: Column(
@@ -773,7 +776,7 @@ class MoneyPage extends HookWidget {
                         children: [
                           SizedBox(
                             width: width * 0.58,
-                            height: height * 0.78,
+                            height: height * 0.76,
                             child: Column(
                               children: [
                                 Row(
@@ -794,7 +797,7 @@ class MoneyPage extends HookWidget {
                                                 ? Theme.of(context)
                                                     .colorScheme
                                                     .onSecondary
-                                                : Colors.black38),
+                                                : Colors.grey.withOpacity(0.4)),
                                         child: Text(
                                           'Lotto',
                                           style: TextStyle(
@@ -822,7 +825,7 @@ class MoneyPage extends HookWidget {
                                                 ? Theme.of(context)
                                                     .colorScheme
                                                     .onSecondary
-                                                : Colors.black38),
+                                                : Colors.grey.withOpacity(0.4)),
                                         child: Text(
                                           'Department',
                                           style: TextStyle(
@@ -835,26 +838,28 @@ class MoneyPage extends HookWidget {
                                   ],
                                 ),
                                 Container(
-                                  margin: EdgeInsets.symmetric(vertical: 7.h),
                                   height: height * 0.69,
+                                  width: width,
                                   color: Colors.black38.withOpacity(0.1),
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       //  subtotal and other details in row item
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           SizedBox(
-                                            width: width * 0.4,
-                                            height: height * 0.502,
+                                            width: width * 0.26,
+                                            height: height * 0.51,
                                             child: isLotto.value == true
                                                 ? GridView.builder(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 0.h),
                                                     scrollDirection:
                                                         Axis.vertical,
                                                     shrinkWrap: true,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 5.w,
-                                                            vertical: 9.h),
                                                     itemCount: 6,
                                                     gridDelegate:
                                                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -866,15 +871,16 @@ class MoneyPage extends HookWidget {
                                                             .symmetric(
                                                                 horizontal: 1.w,
                                                                 vertical: 3.h),
-                                                        width: width * 0.2,
+                                                        width: width * 0.15,
                                                         height: height * 0.03,
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
                                                                         10),
-                                                            color:
-                                                                Colors.white),
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.6)),
                                                         child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -887,6 +893,8 @@ class MoneyPage extends HookWidget {
                                                               'asset/Icons/cash-machine.png',
                                                               width: 25.w,
                                                               height: 80.h,
+                                                              color:
+                                                                  Colors.white,
                                                               fit: BoxFit
                                                                   .fitWidth,
                                                             ),
@@ -896,7 +904,7 @@ class MoneyPage extends HookWidget {
                                                                   fontSize:
                                                                       6.sp,
                                                                   color: Colors
-                                                                      .black,
+                                                                      .white,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -909,30 +917,94 @@ class MoneyPage extends HookWidget {
                                                 : Container(),
                                           ),
                                           Container(
-                                            width: 1.w,
-                                            height: height * 0.54,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 5.w),
-                                            color:
-                                                Colors.black.withOpacity(0.3),
-                                          ),
+                                            width: width * 0.28,
+                                            height: height * 0.57,
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                    width: width * 0.25,
+                                                    height: height * 0.06,
+                                                    child: TextFormField(
+                                                      readOnly: true,
+                                                      initialValue: _pin.value,
+                                                      style: TextStyle(
+                                                          fontSize: 12.sp,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                      textAlignVertical:
+                                                          TextAlignVertical
+                                                              .bottom,
+                                                      textAlign:
+                                                          TextAlign.right,
+                                                      textDirection:
+                                                          TextDirection.rtl,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: '0.00',
+                                                        hintStyle: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                        prefixIcon: Icon(
+                                                          FontAwesomeIcons.usd,
+                                                          size: 10.w,
+                                                          color: Colors.white,
+                                                        ),
+                                                        enabledBorder: UnderlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                        focusedBorder: UnderlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                        focusedErrorBorder:
+                                                            UnderlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                      ),
+                                                    )),
+                                                SizedBox(
+                                                    width: width * 0.28,
+                                                    height: height * 0.48,
+                                                    child: KeyPadCustom(
+                                                        pin: _pin.value)),
+                                              ],
+                                            ),
+                                          )
                                         ],
                                       ),
                                       SizedBox(height: 10.h),
-                                      Divider(
-                                        height: 1,
-                                        color: Colors.black12,
-                                        thickness: 1.w,
-                                      ),
-                                      // amount short
                                       Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Container(
                                             alignment: Alignment.center,
                                             margin: EdgeInsets.symmetric(
                                                 vertical: 4.h, horizontal: 3.w),
-                                            width: 25.w,
-                                            height: 80.h,
+                                            width: 34.w,
+                                            height: 60.h,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
@@ -940,107 +1012,7 @@ class MoneyPage extends HookWidget {
                                                     .colorScheme
                                                     .onSecondary),
                                             child: Text(
-                                              'Card',
-                                              style: TextStyle(
-                                                  fontSize: 7.sp,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 4.h, horizontal: 1.w),
-                                            width: 25.w,
-                                            height: 80.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondary),
-                                            child: Text(
-                                              '\$ 5',
-                                              style: TextStyle(
-                                                  fontSize: 7.sp,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 4.h, horizontal: 1.w),
-                                            width: 25.w,
-                                            height: 80.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondary),
-                                            child: Text(
-                                              '\$ 10',
-                                              style: TextStyle(
-                                                  fontSize: 7.sp,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 4.h, horizontal: 1.w),
-                                            width: 25.w,
-                                            height: 80.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondary),
-                                            child: Text(
-                                              '\$ 20',
-                                              style: TextStyle(
-                                                  fontSize: 7.sp,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 4.h, horizontal: 1.w),
-                                            width: 25.w,
-                                            height: 80.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondary),
-                                            child: Text(
-                                              '\$50',
-                                              style: TextStyle(
-                                                  fontSize: 7.sp,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 4.h, horizontal: 1.w),
-                                            width: 25.w,
-                                            height: 80.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondary),
-                                            child: Text(
-                                              '\$100',
+                                              'CARD',
                                               style: TextStyle(
                                                   fontSize: 7.sp,
                                                   color: Colors.white,
@@ -1052,7 +1024,7 @@ class MoneyPage extends HookWidget {
                                             margin: EdgeInsets.symmetric(
                                                 vertical: 4.h, horizontal: 1.w),
                                             width: 34.w,
-                                            height: 80.h,
+                                            height: 60.h,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
@@ -1060,8 +1032,67 @@ class MoneyPage extends HookWidget {
                                                     .colorScheme
                                                     .onSecondary),
                                             child: Text(
-                                              'Exact AMT',
-                                              textAlign: TextAlign.center,
+                                              'Cash',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Last Print',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'Void',
+                                              style: TextStyle(
+                                                  fontSize: 7.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 4.h, horizontal: 1.w),
+                                            width: 34.w,
+                                            height: 60.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                            child: Text(
+                                              'No Sale',
                                               style: TextStyle(
                                                   fontSize: 7.sp,
                                                   color: Colors.white,
@@ -1371,54 +1402,71 @@ class MoneyPage extends HookWidget {
                       )
                     ],
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                          padding: const EdgeInsets.symmetric(vertical: 0),
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.print_outlined,
-                            size: 12.w,
-                            color: Colors.white,
-                          )),
-                      Text(
-                        'Reprint',
-                        style: TextStyle(
-                            fontSize: 5.sp,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
+                  InkWell(
+                    onTap: () {
+                      ReprintPage.route.pushOnThis(context);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.print_outlined,
+                          size: 12.w,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          'Reprint',
+                          style: TextStyle(
+                              fontSize: 5.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.access_time_outlined,
                     name: 'abc',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.discount,
                     name: 'Discount',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.priceCheck(context);
+                        },
+                      );
+                    },
                     icons: Icons.security,
                     name: 'Check',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.store,
                     name: 'Store',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.newspaper,
                     name: 'Info',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.pause_circle_filled,
                     name: 'Stop',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.skip_next_rounded,
                     name: 'next',
                   ),
-                  const IconsButtonsBottom(
+                  IconsButtonsBottom(
+                    onTap: () {},
                     icons: Icons.price_change,
                     name: 'Chg-AMT',
                   ),
@@ -1439,22 +1487,32 @@ class MoneyPage extends HookWidget {
 class IconsButtonsBottom extends StatelessWidget {
   final IconData icons;
   final String name;
+  final Function() onTap;
   const IconsButtonsBottom(
-      {super.key, required this.icons, required this.name});
+      {super.key,
+      required this.icons,
+      required this.name,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(
-            onPressed: () {},
-            icon: Icon(icons, size: 14.sp, color: Colors.white)),
-        Text(
-          name,
-          style: TextStyle(
-              fontSize: 5.sp, color: Colors.white, fontWeight: FontWeight.bold),
-        )
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 2.8.w),
+        child: Row(
+          children: [
+            Icon(icons, size: 14.sp, color: Colors.white),
+            Text(
+              name,
+              style: TextStyle(
+                  fontSize: 5.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
