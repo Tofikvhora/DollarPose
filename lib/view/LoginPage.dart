@@ -25,7 +25,7 @@ class LoginPage extends HookWidget {
     return Scaffold(
       body: ListView(
         children: [
-          Container(
+          SizedBox(
             width: width,
             height: height,
             child: Row(

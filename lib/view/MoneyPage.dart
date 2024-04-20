@@ -577,7 +577,7 @@ class MoneyPage extends HookWidget {
                                                   )
                                                 : Container(),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: width * 0.28,
                                             height: height * 0.57,
                                             child: Column(
@@ -916,7 +916,7 @@ class MoneyPage extends HookWidget {
                                                   )
                                                 : Container(),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: width * 0.28,
                                             height: height * 0.57,
                                             child: Column(
@@ -1456,7 +1456,14 @@ class MoneyPage extends HookWidget {
                     name: 'Info',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.holdDialog(context);
+                        },
+                      );
+                    },
                     icons: Icons.pause_circle_filled,
                     name: 'Stop',
                   ),

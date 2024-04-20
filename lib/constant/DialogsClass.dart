@@ -1304,6 +1304,74 @@ class DialogsServices {
       ),
     );
   }
+
+  static holdDialog(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Center(
+      child: Dialog(
+        child: ListView(
+          padding: EdgeInsets.symmetric(vertical: 150.h, horizontal: 50.w),
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            Container(
+              color: Colors.black,
+              width: width * 0.8,
+              height: height * 0.3,
+              child: Column(
+                children: [
+                  commonHeading(context, 'Hold'),
+                  Center(
+                    child: textFieldAndText(
+                        context,
+                        '       ENTER REMARK                             :     ',
+                        0.4),
+                  ),
+                  SizedBox(height: 20.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        width: width * 0.15,
+                        height: height * 0.065,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Theme.of(context).colorScheme.onSecondary),
+                        child: Text(
+                          'OK',
+                          style: TextStyle(
+                              fontSize: 6.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(width: 7.w),
+                      Container(
+                        alignment: Alignment.center,
+                        width: width * 0.15,
+                        height: height * 0.065,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Theme.of(context).colorScheme.onSecondary),
+                        child: Text(
+                          'CENCEL',
+                          style: TextStyle(
+                              fontSize: 6.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 Widget textFieldAndText(

@@ -1,3 +1,9 @@
+import 'package:dollarpos/view/AddPages/Distributors.dart';
+import 'package:dollarpos/view/AddPages/ItemGroup.dart';
+import 'package:dollarpos/view/AddPages/SpecialPricing.dart';
+import 'package:dollarpos/view/AddPages/Splitpack.dart';
+import 'package:dollarpos/view/AddPages/TagAlong.dart';
+import 'package:dollarpos/view/AddPages/genralPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +17,17 @@ class AddPage extends HookWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final pages = useState([
+      const GeneralPage(),
+      const SplitPack(),
+      const SpecialPricing(),
+      const TagAlong(),
+      const DistributorsPage(),
+      const ItemGroup()
+    ]);
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 5.w),
+        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
         children: [
           // heading part
           SafeArea(
@@ -78,7 +92,7 @@ class AddPage extends HookWidget {
           // first content part
           SizedBox(
             width: width,
-            height: height * 0.28,
+            height: height * 0.25,
             child: Row(
               children: [
                 // first column of add page
@@ -96,7 +110,7 @@ class AddPage extends HookWidget {
                         ),
                         SizedBox(
                           width: width * 0.1,
-                          height: height * 0.06,
+                          height: height * 0.05,
                           child: TextField(
                             style: TextStyle(
                                 fontSize: 5.sp,
@@ -116,7 +130,7 @@ class AddPage extends HookWidget {
                       alignment: Alignment.center,
                       margin: EdgeInsets.symmetric(vertical: 10.h),
                       width: width * 0.14,
-                      height: height * 0.185,
+                      height: height * 0.16,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.circular(5)),
@@ -274,7 +288,7 @@ class AddPage extends HookWidget {
                 ),
                 Container(
                   width: width * 0.2,
-                  height: height * 0.34,
+                  height: height * 0.28,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(color: Colors.white)),
@@ -291,17 +305,13 @@ class AddPage extends HookWidget {
           ),
           // page View part
           SizedBox(height: 10.h),
-          SizedBox(
-            width: width,
-            height: height * 0.6,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: width,
-                  height: height * 0.06,
-                  child: DefaultTabController(
-                    length: 6,
-                    child: TabBar(
+          Column(
+            children: [
+              DefaultTabController(
+                length: 6,
+                child: Column(
+                  children: [
+                    TabBar(
                       tabAlignment: TabAlignment.start,
                       isScrollable: true,
                       dividerColor: Colors.transparent,
@@ -309,7 +319,6 @@ class AddPage extends HookWidget {
                           fontSize: 5.sp,
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontWeight: FontWeight.bold),
-                      padding: EdgeInsets.only(bottom: 5.h),
                       unselectedLabelColor: Colors.white.withOpacity(0.5),
                       unselectedLabelStyle: TextStyle(
                           fontSize: 5.sp, color: Colors.white.withOpacity(0.2)),
@@ -401,11 +410,25 @@ class AddPage extends HookWidget {
                         ),
                       ],
                     ),
-                  ),
-                )
-              ],
-            ),
-          )
+                    SizedBox(
+                      width: width,
+                      height: height * 0.6,
+                      child: const TabBarView(
+                        children: [
+                          GeneralPage(),
+                          SplitPack(),
+                          SpecialPricing(),
+                          TagAlong(),
+                          DistributorsPage(),
+                          ItemGroup()
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
@@ -441,7 +464,7 @@ Widget commonTextAndFields(BuildContext context, String name) {
               fontWeight: FontWeight.bold)),
       SizedBox(
         width: width * 0.2,
-        height: height * 0.06,
+        height: height * 0.05,
         child: TextField(
           style: TextStyle(
               fontSize: 5.sp, color: Colors.white, fontWeight: FontWeight.bold),

@@ -157,7 +157,8 @@ class ItemPage extends HookWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        // Add logic for delete button
+                                        //TODO: passData if its require
+                                        AddPage.route.pushOnThis(context);
                                       },
                                       child: const Icon(IconlyBold.edit,
                                           color: Colors.white),
@@ -176,26 +177,83 @@ class ItemPage extends HookWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Add logic for clone button
-                                      },
-                                      child: const Icon(Icons.delete,
-                                          color: Colors.white),
-                                    ),
-                                    const Text('Delete',
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.white)),
-                                  ],
+                              child: InkWell(
+                                onTap: () {
+                                  //TODO: Delete logic here
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        actions: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  //TODO: Add Logic here
+                                                },
+                                                child: Text('NO',
+                                                    style: TextStyle(
+                                                        fontSize: 6.sp,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ),
+                                              SizedBox(width: 10.w),
+                                              InkWell(
+                                                onTap: () {
+                                                  //TODO: Add Logic here
+                                                },
+                                                child: Text('YES',
+                                                    style: TextStyle(
+                                                        fontSize: 6.sp,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onPrimary,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                        backgroundColor: Colors.black,
+                                        icon: Center(
+                                          child: Icon(
+                                            Icons.info_outline,
+                                            size: 15.w,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary,
+                                          ),
+                                        ),
+                                        title: Text(
+                                          'Are You really want to delete this?',
+                                          style: TextStyle(
+                                              fontSize: 5.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Column(
+                                    children: [
+                                      Icon(Icons.delete, color: Colors.white),
+                                      Text('Delete',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white)),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -212,7 +270,8 @@ class ItemPage extends HookWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        // Add logic for the additional button
+                                        //TODO: passData if its require
+                                        AddPage.route.pushOnThis(context);
                                       },
                                       child: const Icon(Icons.content_copy,
                                           color: Colors.white),
