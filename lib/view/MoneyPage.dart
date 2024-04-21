@@ -680,24 +680,118 @@ class MoneyPage extends HookWidget {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 4.h, horizontal: 1.w),
-                                            width: 34.w,
-                                            height: 60.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondary),
-                                            child: Text(
-                                              'Cash',
-                                              style: TextStyle(
-                                                  fontSize: 7.sp,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
+                                          InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return DialogsServices
+                                                      .cashDialog(
+                                                          context,
+                                                          Column(
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: width *
+                                                                      0.25,
+                                                                  height:
+                                                                      height *
+                                                                          0.07,
+                                                                  child:
+                                                                      TextFormField(
+                                                                    readOnly:
+                                                                        true,
+                                                                    initialValue:
+                                                                        _pin.value,
+                                                                    style: TextStyle(
+                                                                        fontSize: 12
+                                                                            .sp,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                    textAlignVertical:
+                                                                        TextAlignVertical
+                                                                            .bottom,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right,
+                                                                    textDirection:
+                                                                        TextDirection
+                                                                            .rtl,
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      hintText:
+                                                                          '0.00',
+                                                                      hintStyle: TextStyle(
+                                                                          fontSize: 12
+                                                                              .sp,
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                      prefixIcon:
+                                                                          Icon(
+                                                                        FontAwesomeIcons
+                                                                            .usd,
+                                                                        size: 10
+                                                                            .w,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      enabledBorder: UnderlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          borderSide:
+                                                                              const BorderSide(color: Colors.white)),
+                                                                      focusedBorder: UnderlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          borderSide:
+                                                                              const BorderSide(color: Colors.white)),
+                                                                      focusedErrorBorder: UnderlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          borderSide:
+                                                                              const BorderSide(color: Colors.white)),
+                                                                    ),
+                                                                  )),
+                                                              SizedBox(
+                                                                  height: 26.h),
+                                                              SizedBox(
+                                                                  width: width *
+                                                                      0.28,
+                                                                  height:
+                                                                      height *
+                                                                          0.45,
+                                                                  child: KeyPadCustom(
+                                                                      pin: _pin
+                                                                          .value)),
+                                                            ],
+                                                          ));
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 1.w),
+                                              width: 34.w,
+                                              height: 60.h,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary),
+                                              child: Text(
+                                                'Cash',
+                                                style: TextStyle(
+                                                    fontSize: 7.sp,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                           ),
                                           Container(
@@ -1373,6 +1467,8 @@ class MoneyPage extends HookWidget {
               ],
             ),
           ),
+
+          /// Bottom Icons and text
           Container(
             alignment: Alignment.center,
             width: width,
@@ -1383,25 +1479,31 @@ class MoneyPage extends HookWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                          padding: const EdgeInsets.symmetric(vertical: 0),
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.print,
-                            size: 12.w,
-                            color: Colors.white,
-                          )),
-                      Text(
-                        'Last\nprint',
-                        style: TextStyle(
-                            fontSize: 5.sp,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
+                  InkWell(
+                    onTap: () {
+                      //TODO: Add functions of print
+                    },
+                    child: Row(
+                      children: [
+                        IconButton(
+                            padding: const EdgeInsets.symmetric(vertical: 0),
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.print,
+                              size: 12.w,
+                              color: Colors.white,
+                            )),
+                        Text(
+                          'Last\nprint',
+                          style: TextStyle(
+                              fontSize: 5.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
                   ),
+                  SizedBox(width: 3.w),
                   InkWell(
                     onTap: () {
                       ReprintPage.route.pushOnThis(context);
@@ -1426,12 +1528,19 @@ class MoneyPage extends HookWidget {
                   IconsButtonsBottom(
                     onTap: () {},
                     icons: Icons.access_time_outlined,
-                    name: 'abc',
+                    name: 'Pay-IN\nOUT',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.refundItem(context);
+                        },
+                      );
+                    },
                     icons: Icons.discount,
-                    name: 'Discount',
+                    name: 'Refund',
                   ),
                   IconsButtonsBottom(
                     onTap: () {
@@ -1442,18 +1551,20 @@ class MoneyPage extends HookWidget {
                         },
                       );
                     },
-                    icons: Icons.security,
-                    name: 'Check',
+                    icons: Icons.price_check,
+                    name: 'Check\nPrice',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
-                    icons: Icons.store,
-                    name: 'Store',
-                  ),
-                  IconsButtonsBottom(
-                    onTap: () {},
-                    icons: Icons.newspaper,
-                    name: 'Info',
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogsServices.changePrice(context);
+                        },
+                      );
+                    },
+                    icons: Icons.price_change,
+                    name: 'Change\nPrice',
                   ),
                   IconsButtonsBottom(
                     onTap: () {
@@ -1473,9 +1584,55 @@ class MoneyPage extends HookWidget {
                     name: 'next',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
-                    icons: Icons.price_change,
-                    name: 'Chg-AMT',
+                    onTap: () {
+                      //TODO: add delete function
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.black,
+                            icon: Icon(
+                              Icons.info_outline,
+                              size: 12.w,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            title: Text(
+                              'Do you Really want to delete this transaction',
+                              style: TextStyle(
+                                  fontSize: 7.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            actions: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "NO",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Text(
+                                    "YES",
+                                    style: TextStyle(
+                                        fontSize: 6.sp,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icons: Icons.delete,
+                    name: 'Delete',
                   ),
                   IconButton(
                       onPressed: () {},
@@ -1506,10 +1663,11 @@ class IconsButtonsBottom extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2.8.w),
+        padding: EdgeInsets.symmetric(horizontal: 3.w),
         child: Row(
           children: [
             Icon(icons, size: 14.sp, color: Colors.white),
+            SizedBox(width: 2.w),
             Text(
               name,
               style: TextStyle(

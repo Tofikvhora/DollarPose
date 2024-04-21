@@ -1372,6 +1372,475 @@ class DialogsServices {
       ),
     );
   }
+
+  static cashDialog(BuildContext context, Widget keypad) {
+    final width = MediaQuery.of(context).size.width;
+    final usdList = [
+      '\$1',
+      '\$2',
+      '\$5',
+      '\$10',
+      '\$15',
+      '\$20',
+      '\$50',
+      '\$75',
+      '\$100'
+    ];
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 60.h),
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            color: Colors.black,
+            width: width * 0.8,
+            height: height * 0.68,
+            child: Column(
+              children: [
+                commonHeading(context, 'CASH'),
+                SizedBox(height: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: width * 0.3,
+                          height: height * 0.482,
+                          child: GridView.builder(
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: 9,
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  //TODO : Add logic here
+                                },
+                                child: Container(
+                                  height: height * 0.05,
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 5.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary),
+                                  child: Text(
+                                    usdList[index].toString(),
+                                    style: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              width: width * 0.15,
+                              height: height * 0.07,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary),
+                              child: Text(
+                                'EXACT',
+                                style: TextStyle(
+                                    fontSize: 6.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Container(
+                              alignment: Alignment.center,
+                              width: width * 0.15,
+                              height: height * 0.07,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.grey.withOpacity(0.5)),
+                              child: Text(
+                                'NEXT',
+                                style: TextStyle(
+                                    fontSize: 6.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey.withOpacity(0.4),
+                      ),
+                      width: width * 0.28,
+                      height: height * 0.58,
+                      child: keypad,
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static changePrice(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 50.w),
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            color: Colors.black,
+            width: width * 0.9,
+            height: height * 0.6,
+            child: Column(
+              children: [
+                commonHeading(context, 'Price Change'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    textFieldAndText(context, 'UPC            :', 0.24),
+                    textFieldAndText(context, 'SKU         :', 0.24),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    textFieldAndText(context, 'Item Name    :', 0.24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: width * 0.1,
+                          height: height * 0.065,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.onSecondary),
+                          child: Text(
+                            'RESET',
+                            style: TextStyle(
+                                fontSize: 6.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(width: 7.w),
+                        Container(
+                          alignment: Alignment.center,
+                          width: width * 0.1,
+                          height: height * 0.065,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.onSecondary),
+                          child: Text(
+                            'LOOK-UP',
+                            style: TextStyle(
+                                fontSize: 6.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                DataTable(
+                    columnSpacing: 24.w,
+                    headingRowHeight: 39.h,
+                    dataTextStyle: TextStyle(
+                        fontSize: 4.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    headingTextStyle: TextStyle(
+                        fontSize: 4.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    headingRowColor: MaterialStatePropertyAll<Color>(
+                        Theme.of(context).colorScheme.onSecondary),
+                    columns: const [
+                      DataColumn(
+                        label: Text('DEPARTMENT NAME'),
+                      ),
+                      DataColumn(
+                        label: Text('IS FAVOURITE'),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'DEPT SHORTCUT',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'SURCHARGE',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                    rows:
+                        // TODO: this is static data just add your data list and map data copy below code and past into map
+                        const [
+                      DataRow(cells: [
+                        DataCell(Text('1')),
+                        DataCell(Text('Tofik vhora')),
+                        DataCell(Text('Tofik vhora')),
+                        DataCell(Text('Tofik vhora')),
+                      ])
+                    ]),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static multiReturnDialog(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 30.w),
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            color: Colors.black,
+            width: width * 0.9,
+            height: height * 0.6,
+            child: Column(
+              children: [
+                commonHeading(context, ''),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: textFieldAndText(context, 'Barcode', 0.24),
+                ),
+                SizedBox(height: 20.h),
+                DataTable(
+                    columnSpacing: 25.w,
+                    headingRowHeight: 39.h,
+                    dataTextStyle: TextStyle(
+                        fontSize: 4.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    headingTextStyle: TextStyle(
+                        fontSize: 4.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    headingRowColor: MaterialStatePropertyAll<Color>(
+                        Theme.of(context).colorScheme.onSecondary),
+                    columns: const [
+                      DataColumn(
+                        label: Text('POS ORDERED'),
+                      ),
+                      DataColumn(
+                        label: Text('TRANSACTION DATE'),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'ITEM',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'METHOD',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'AMOUNT',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                    rows:
+                        // TODO: this is static data just add your data list and map data copy below code and past into map
+                        const [
+                      DataRow(cells: [
+                        DataCell(Text('1')),
+                        DataCell(Text('Tofik vhora')),
+                        DataCell(Text('Tofik vhora')),
+                        DataCell(Text('Tofik vhora')),
+                        DataCell(Text('Tofik vhora')),
+                      ])
+                    ]),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static refundItem(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return Dialog(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 150.h, horizontal: 75.w),
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            width: width * 0.75,
+            height: height * 0.4,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.black,
+            ),
+            child: Column(
+              children: [
+                commonHeading(context, 'Refund'),
+                SizedBox(height: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return multiReturnDialog(context);
+                          },
+                        ).then((value) {
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: width * 0.18,
+                        height: height * 0.2,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            FaIcon(FontAwesomeIcons.boxes,
+                                size: 12.w, color: Colors.white),
+                            Text(
+                              "Multi Return",
+                              style: TextStyle(
+                                  fontSize: 6.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: Colors.black,
+                              icon: Icon(
+                                Icons.info_outline,
+                                size: 12.w,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                              title: Text(
+                                'Do you want to apply SINGLE item return',
+                                style: TextStyle(
+                                    fontSize: 7.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      "NO",
+                                      style: TextStyle(
+                                          fontSize: 6.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(width: 8.w),
+                                    Text(
+                                      "YES",
+                                      style: TextStyle(
+                                          fontSize: 6.sp,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            );
+                          },
+                        ).then((value) {
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: width * 0.18,
+                        height: height * 0.2,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            FaIcon(FontAwesomeIcons.boxesPacking,
+                                size: 12.w, color: Colors.white),
+                            Text(
+                              "Single Return",
+                              style: TextStyle(
+                                  fontSize: 6.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 Widget textFieldAndText(
