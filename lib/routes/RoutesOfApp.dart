@@ -1,6 +1,7 @@
 import 'package:dollarpos/view/ActionPage.dart';
 import 'package:dollarpos/view/AddPage.dart';
 import 'package:dollarpos/view/EmpolyPage.dart';
+import 'package:dollarpos/view/EndShiftPage.dart';
 import 'package:dollarpos/view/ItemPage.dart';
 import 'package:dollarpos/view/LoginPage.dart';
 import 'package:dollarpos/view/ManuPage.dart';
@@ -31,6 +32,8 @@ class RoutesOfApp {
         return MaterialPageRoute(builder: (_) => const ReprintPage());
       case AddPage.route:
         return MaterialPageRoute(builder: (_) => const AddPage());
+      case EndShiftPage.route:
+        return MaterialPageRoute(builder: (_) => const EndShiftPage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
