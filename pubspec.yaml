@@ -17,6 +17,7 @@ dependencies:
   flutter_hooks: ^0.20.1
   font_awesome_flutter: ^10.7.0
   dotted_line: ^3.2.2
+  fl_chart: ^0.67.0
 
 dev_dependencies:
   flutter_test:

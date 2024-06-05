@@ -2,6 +2,7 @@ import 'package:dollarpos/Widgets/KeyPad.dart';
 import 'package:dollarpos/constant/DialogsClass.dart';
 import 'package:dollarpos/utils/StringNavigation.dart';
 import 'package:dollarpos/view/AddPage.dart';
+import 'package:dollarpos/view/HistoryPage/HistoryPage.dart';
 import 'package:dollarpos/view/PriceChangePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -521,7 +522,9 @@ class ItemPage extends HookWidget {
                     name: 'Price change',
                   ),
                   IconsButtonsBottom(
-                    onTap: () {},
+                    onTap: () {
+                      HistoryPage.route.pushOnThis(context);
+                    },
                     icons: Icons.history,
                     name: 'History',
                   ),
